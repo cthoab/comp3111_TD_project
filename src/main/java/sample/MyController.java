@@ -63,6 +63,18 @@ public class MyController {
         newLabel.setText("*");
         newLabel.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
         paneArena.getChildren().addAll(newLabel);
+        Label newLabel2 = new Label();
+        newLabel2.setLayoutX(GRID_WIDTH * 8);
+        newLabel2.setLayoutY(GRID_WIDTH * 8);
+        newLabel2.setMinWidth(GRID_WIDTH / 2);
+        newLabel2.setMaxWidth(GRID_WIDTH / 2);
+        newLabel2.setMinHeight(GRID_WIDTH / 2);
+        newLabel2.setMaxHeight(GRID_WIDTH / 2);
+        newLabel2.setStyle("-fx-border-color: black;");
+        newLabel2.setText("*");
+        newLabel2.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        paneArena.getChildren().addAll(newLabel2);
+        
     }
 
     /**
