@@ -1,4 +1,4 @@
-package sample;
+package MainProgram;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
