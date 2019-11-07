@@ -7,6 +7,12 @@ public class LabMonster {
     void f(){}
     void g(){}
     void h(){}
+
+
+
+    int i(){
+        return 0;
+    }
     //Not the same comment
 
 
