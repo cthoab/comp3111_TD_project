@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="LAB5">
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/MyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/MyController.java" afterDir="false" />
+    <list default="true" id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="Lab8.1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Monster/LabMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Monster/LabMonster.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/classes/" />
-    <ignored path="$PROJECT_DIR$/.gradle/" />
-    <ignored path="$PROJECT_DIR$/build/" />
-    <ignored path="$PROJECT_DIR$/out/" />
+    <list id="8db66b15-4180-4fe7-a5f6-a9342d0c9480" name="Lab8.1" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/comp3111_TD_project_main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/comp3111_TD_project_test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/DragDroppedEventHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/DragEventHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sample.fxml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,42 +36,43 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/MyController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="64" column="49" lean-forward="true" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Lab8" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Lab8" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Lab8" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -81,20 +86,35 @@
         <option value="skliag" />
       </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/MyController.java" />
-      </list>
-    </option>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="3" end1="15" start2="3" end2="22" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="16" end1="20" start2="23" end2="23" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="34" end1="70" start2="37" end2="74" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="83" end1="84" start2="87" end2="87" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="89" end1="97" start2="92" end2="93" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="98" end1="103" start2="94" end2="95" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="104" end1="154" start2="96" end2="96" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="171" end1="172" start2="113" end2="114" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="185" end1="185" start2="127" end2="146" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="204" end1="204" start2="165" end2="167" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="206" end1="206" start2="169" end2="170" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="215" end1="215" start2="179" end2="180" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="220" end1="220" start2="185" end2="214" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="231" end1="265" start2="225" end2="225" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="281" end1="295" start2="241" end2="242" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="317" end1="318" start2="264" end2="267" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="322" end1="351" start2="271" end2="271" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
@@ -213,11 +233,41 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="" />
+      <changelist id="8db66b15-4180-4fe7-a5f6-a9342d0c9480" name="Lab8.1" comment="" />
       <created>1571307957811</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571307957811</updated>
     </task>
+    <task id="LOCAL-00001" summary="Correction on Master's Towers and Package name.">
+      <created>1573122304080</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573122304080</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Correction on Master's Towers and Package name.">
+      <created>1573122418184</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573122418184</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Lab8.1">
+      <created>1573123303157</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573123303157</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Lab8.1">
+      <created>1573123354589</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573123354589</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -315,7 +365,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="LAB5" />
-    <option name="LAST_COMMIT_MESSAGE" value="LAB5" />
+    <MESSAGE value="Correction on Master's Towers and Package name." />
+    <MESSAGE value="Lab8.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8.1" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
