@@ -7,4 +7,5 @@ public class LabMonster {
     void f(){}
     void g(){}
     //comment here
+    //comment again
 }

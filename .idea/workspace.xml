@@ -96,23 +96,18 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/.idea/workspace.xml">
       <ranges>
-        <range start1="3" end1="15" start2="3" end2="22" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
-        <range start1="16" end1="20" start2="23" end2="23" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="34" end1="70" start2="37" end2="74" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="83" end1="84" start2="87" end2="87" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="89" end1="97" start2="92" end2="93" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="98" end1="103" start2="94" end2="95" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="104" end1="154" start2="96" end2="96" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="171" end1="172" start2="113" end2="114" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="185" end1="185" start2="127" end2="146" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="204" end1="204" start2="165" end2="167" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="206" end1="206" start2="169" end2="170" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="215" end1="215" start2="179" end2="180" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
-        <range start1="220" end1="220" start2="185" end2="214" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
-        <range start1="231" end1="265" start2="225" end2="225" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="281" end1="295" start2="241" end2="242" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
-        <range start1="317" end1="318" start2="264" end2="267" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
-        <range start1="322" end1="351" start2="271" end2="271" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="3" end1="7" start2="3" end2="4" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="94" end1="117" start2="91" end2="91" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="118" end1="123" start2="92" end2="93" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="124" end1="174" start2="94" end2="94" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="191" end1="192" start2="111" end2="112" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="204" end1="204" start2="124" end2="143" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="224" end1="224" start2="163" end2="165" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="226" end1="226" start2="167" end2="168" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="269" end1="270" start2="211" end2="226" changelist="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" />
+        <range start1="281" end1="315" start2="237" end2="237" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="331" end1="345" start2="253" end2="254" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
+        <range start1="374" end1="403" start2="283" end2="283" changelist="8db66b15-4180-4fe7-a5f6-a9342d0c9480" />
       </ranges>
     </file>
   </component>
@@ -267,7 +262,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573123354589</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lab8.1">
+      <created>1573124379561</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1573124379561</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Lab8.1">
+      <created>1573124504684</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1573124504684</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
