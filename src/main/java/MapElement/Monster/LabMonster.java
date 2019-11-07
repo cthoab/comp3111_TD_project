@@ -6,6 +6,6 @@ public class LabMonster {
     }
     void f(){}
     void g(){}
-    //comment here
-    //comment again
+    void h(){}
+    //Not the same comment
 }
