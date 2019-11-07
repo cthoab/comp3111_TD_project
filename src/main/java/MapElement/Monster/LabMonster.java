@@ -13,6 +13,10 @@ public class LabMonster {
     int i(){
         return 0;
     }
+
+    int j(){
+        return 1;
+    }
     //Not the same comment
 
 
