@@ -6,6 +6,7 @@ import MapElement.MapElement;
 public abstract class Monster extends MapElement {
     private int hp;
     private int speed;
+    private int survivedtime;
     protected static int DEFAULT_HP = 5;
     protected static int DEFAULT_SPEED = 1;
 
@@ -15,15 +16,25 @@ public abstract class Monster extends MapElement {
     public void setSpeed(int speed){ this.speed = speed; }
 
     public void move(){
-        //TODO
+        //move down
+        if(this.getY_position()%4 == 0 && this.getX_position() != 11)
+            setY_position(getY_position()+1);
+        //move up
+        else if ((this.getY_position()-2)%4 == 0 && this.getX_position() != 1)
+            setY_position(getY_position()-1);
+        //move right
+        else
+            setX_position(getX_position()+1);
     };
     public void evolve(){
         hp = (int)Math.round(hp * 1.5);
         speed = (int)Math.round(speed * 1.5);
     };
 
+
     protected Monster(){
         this.hp = DEFAULT_HP;
         this.speed = DEFAULT_SPEED;
+        survivedtime = 0;
     }
 }
