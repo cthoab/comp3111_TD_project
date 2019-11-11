@@ -2,7 +2,7 @@ package MapElement.Monster;
 
 public class Fox extends Monster {
 
-    private static int FOX_SPEED = 2;
+    private static int FOX_SPEED = 60;
 
     public Fox(){
         super();
