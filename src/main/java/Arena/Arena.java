@@ -1,11 +1,20 @@
 package Arena;
 
+import MapElement.Monster.*;
+import MapElement.Tower.Tower;
+
+import java.util.ArrayList;
+
 public class Arena {
     Resources resources;
-    Grid[][] arena;
+    ArrayList<Monster> monsters = new ArrayList<>();
+    ArrayList<Tower> towers = new ArrayList<>();
+
+
+
+
 
     public Arena(int size){
-        arena = new Grid[size][size];
         resources = new Resources(0);
     }
 

@@ -35,8 +35,6 @@ public abstract class Tower extends MapElement {
         UpgradeCost = upgradeCost;
     }
 
-    protected abstract boolean attack(Monster m, Resources resources);
-
 
     //To be overridden
     protected boolean upgrade(Resources resources){

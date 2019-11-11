@@ -1,7 +1,6 @@
 package MapElement.Tower;
 
 import Arena.Resources;
-import MapElement.Monster.Monster;
 
 public class BasicTower extends Tower {
     public static int BuildCost;        // TODO need to be assigned value
@@ -27,9 +26,4 @@ public class BasicTower extends Tower {
         return CanUpgrade;
     }
 
-    @Override
-    protected boolean attack(Monster m, Resources resources) {
-        //TODO
-        return false;
-    }
 }
