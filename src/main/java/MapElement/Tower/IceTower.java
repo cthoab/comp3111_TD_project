@@ -5,6 +5,7 @@ import MapElement.Monster.Monster;
 
 public class IceTower extends Tower {
     public static int BuildCost;
+
     public static IceTower BuildIceTower(int damage,int range, Resources resources){
         if (resources.getResources() >= BuildCost)
             return new IceTower(damage,range,BuildCost);
