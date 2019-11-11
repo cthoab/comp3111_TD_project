@@ -41,5 +41,7 @@ public abstract class Monster extends MapElement {
         this.hp = DEFAULT_HP;
         this.speed = DEFAULT_SPEED;
         survivedtime = 0;
+        setX_position(20);
+        setY_position(20);
     }
 }

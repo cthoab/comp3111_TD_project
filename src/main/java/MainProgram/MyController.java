@@ -1,7 +1,9 @@
 package MainProgram;
 
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
@@ -11,6 +13,14 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+
+import java.awt.*;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+
+import Arena.Arena;
+import MapElement.Monster.*;
 
 public class MyController {
     @FXML
@@ -46,35 +56,19 @@ public class MyController {
 
     private Label grids[][] = new Label[MAX_V_NUM_GRID][MAX_H_NUM_GRID]; //the grids on arena
     private int x = -1, y = 0; //where is my monster
+
+    private Arena arena;
+    private ArrayList<Label> MonsterLabel = new ArrayList<Label>();
+
     /**
      * A dummy function to show how button click works
      */
     @FXML
     private void play() {
         System.out.println("Play button clicked");
-        Label newLabel = new Label();
-        newLabel.setLayoutX(GRID_WIDTH / 4);
-        newLabel.setLayoutY(GRID_WIDTH / 4);
-        newLabel.setMinWidth(GRID_WIDTH / 2);
-        newLabel.setMaxWidth(GRID_WIDTH / 2);
-        newLabel.setMinHeight(GRID_WIDTH / 2);
-        newLabel.setMaxHeight(GRID_WIDTH / 2);
-        newLabel.setStyle("-fx-border-color: black;");
-        newLabel.setText("*");
-        newLabel.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-        paneArena.getChildren().addAll(newLabel);
-        Label newLabel2 = new Label();
-        newLabel2.setLayoutX(GRID_WIDTH * 8);
-        newLabel2.setLayoutY(GRID_WIDTH * 8);
-        newLabel2.setMinWidth(GRID_WIDTH / 2);
-        newLabel2.setMaxWidth(GRID_WIDTH / 2);
-        newLabel2.setMinHeight(GRID_WIDTH / 2);
-        newLabel2.setMaxHeight(GRID_WIDTH / 2);
-        newLabel2.setStyle("-fx-border-color: black;");
-        newLabel2.setText("*");
-        newLabel2.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-        paneArena.getChildren().addAll(newLabel2);
-        
+        arena = new Arena();
+        arena.spawnMonster();
+        drawArena(arena);
     }
 
     /**
@@ -101,21 +95,40 @@ public class MyController {
                 grids[i][j] = newLabel;
                 paneArena.getChildren().addAll(newLabel);
             }
-
         setDragAndDrop();
     }
 
     @FXML
     private void nextFrame() {
-        if (x == -1) {
-            grids[0][0].setText("M");
-            x = 0;
-            return;
+        arena.monsterMove();
+        arena.spawnMonster();
+        drawArena(arena);
+    }
+
+    private void drawArena(Arena a){
+        for(Label m : MonsterLabel){
+            paneArena.getChildren().removeAll(m);
         }
-        if (y == MAX_V_NUM_GRID - 1)
-            return;
-        grids[y++][x].setText("");
-        grids[y][x].setText("M");
+        for(Monster m : a.monsters){
+            Label newLabel = new Label();
+            newLabel.setLayoutX(m.getX_position()-10);
+            newLabel.setLayoutY(m.getY_position()-10);
+            newLabel.setMinWidth(GRID_WIDTH / 2);
+            newLabel.setMaxWidth(GRID_WIDTH / 2);
+            newLabel.setMinHeight(GRID_WIDTH / 2);
+            newLabel.setMaxHeight(GRID_WIDTH / 2);
+            newLabel.setStyle("-fx-border-color: none;");
+            Image image;
+            if(m.getClass() == Fox.class)
+                image = new Image("file:src/main/resources/fox20x20.png");
+            else if(m.getClass() == Penguin.class)
+                image = new Image("file:src/main/resources/penguin20x20.png");
+            else
+                image = new Image("file:src/main/resources/unicorn20x20.png");
+            newLabel.setGraphic(new ImageView(image));
+            MonsterLabel.add(newLabel);
+            paneArena.getChildren().addAll(newLabel);
+        }
     }
 
     /**
