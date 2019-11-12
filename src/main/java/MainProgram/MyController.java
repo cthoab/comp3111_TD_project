@@ -1,5 +1,6 @@
 package MainProgram;
 
+import javafx.scene.control.Alert;
 import MapElement.Tower.Catapult;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -163,9 +164,12 @@ public class MyController {
 
     @FXML
     private void nextFrame() {
+        arena.removeDeadMonsters();
         arena.monsterMove();
         arena.spawnMonster();
         drawArena(arena);
+        if(arena.checkGameOver())
+            gameOver();
     }
 
     private void drawArena(Arena a){
@@ -181,8 +185,23 @@ public class MyController {
             newLabel.setMinHeight(GRID_WIDTH / 2);
             newLabel.setMaxHeight(GRID_WIDTH / 2);
             newLabel.setStyle("-fx-border-color: none;");
+            Label info = new Label();
+            newLabel.setOnMouseEntered(e->{
+                info.setText("HP: " + Integer.toString(m.getHP()));
+                info.setLayoutX(m.getX_position()+10);
+                info.setLayoutY(m.getY_position()-10);
+                info.setStyle("-fx-background-color: yellow; -fx-font: 20 arial");
+                info.setMinHeight(30);
+                info.setMinWidth(40);
+                paneArena.getChildren().add(info);
+            });
+            newLabel.setOnMouseExited(e->{
+                paneArena.getChildren().remove(info);
+            });
             Image image;
-            if(m.getClass() == Fox.class)
+            if(m.getHP() <= 0)
+                image = new Image("file:src/main/resources/collision20x20.png");
+            else if(m.getClass() == Fox.class)
                 image = new Image("file:src/main/resources/fox20x20.png");
             else if(m.getClass() == Penguin.class)
                 image = new Image("file:src/main/resources/penguin20x20.png");
@@ -192,6 +211,13 @@ public class MyController {
             MonsterLabel.add(newLabel);
             paneArena.getChildren().addAll(newLabel);
         }
+    }
+
+    public void gameOver(){
+        System.out.println("Gameover");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!");
+        alert.showAndWait();
+        //TODO disable event handlers
     }
 
     /**
@@ -207,10 +233,16 @@ public class MyController {
     private void setDragAndDrop(int row, int col) {
         Label target = grids[row][col];
         target.setText("Drop\nHere");
-
-//        double orgSceneX, orgSceneY;
-//        double orgTranslateX, orgTranslateY;
-
+        Label source1 = labelBasicTower;
+        Label source2 = labelIceTower;
+        Label source3 = labelCatapult;
+        Label source4 = labelLaserTower;
+        double orgSceneX, orgSceneY;
+        double orgTranslateX, orgTranslateY;
+        source1.setOnDragDetected(new DragEventHandler(source1));
+        source2.setOnDragDetected(new DragEventHandler(source2));
+        source3.setOnDragDetected(new DragEventHandler(source3));
+        source4.setOnDragDetected(new DragEventHandler(source4));
         target.setOnDragDropped(new DragDroppedEventHandler(arena,paneArena,labelResource));
         //well, you can also write anonymous class or even lambda
         //Anonymous class
@@ -285,6 +317,15 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
         Target.setOnMouseExited(new MouseExitDismissInfoHandler(anchorPane));
     }
 
+    private void ShowAlert(int position_x, int position_y){
+        Alert alert;
+        if (arena.TowerInfo(position_x,position_y) != null)
+            alert = new Alert(Alert.AlertType.INFORMATION, "You can not build tower on an existing tower!");
+        else
+            alert = new Alert(Alert.AlertType.INFORMATION, "Not enough resources to build");
+        alert.showAndWait();
+    }
+
     @Override
     public void handle(DragEvent event) {
         System.out.println("xx");
@@ -294,6 +335,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
         if (db.hasString()) {
             success = true;
             Image image;
+            Alert alert;
             int position_x = (int) ((Label) event.getGestureTarget()).getLayoutX();
             int position_y = (int) ((Label) event.getGestureTarget()).getLayoutY();
             switch (db.getString()){
@@ -304,6 +346,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
                     }
+                    else ShowAlert(position_x, position_y);
                     break;
                 case "Ice Tower":
                     if(arena.BuildTower('I',position_x,position_y)) {
@@ -312,6 +355,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
                     }
+                    else ShowAlert(position_x,position_y);
                     break;
                 case "Catapult":
                     if(arena.BuildTower('C',position_x,position_y)) {
@@ -320,6 +364,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
                     }
+                    else ShowAlert(position_x,position_y);
                     break;
                 case "Laser Tower":
                     if(arena.BuildTower('L',position_x,position_y)) {
@@ -328,6 +373,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
                     }
+                    else ShowAlert(position_x,position_y);
                     break;
             }
         }
