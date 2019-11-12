@@ -1,10 +1,10 @@
 package MapElement.Tower;
 
 import Arena.Resources;
-import MapElement.Monster.Monster;
 
 public class IceTower extends Tower {
     public static int BuildCost;
+
     public static IceTower BuildIceTower(int damage,int range, Resources resources){
         if (resources.getResources() >= BuildCost)
             return new IceTower(damage,range,BuildCost);
@@ -18,8 +18,4 @@ public class IceTower extends Tower {
         super(damage, range, UpgradeCost);
     }
 
-    @Override
-    protected boolean attack(Monster m, Resources resources) {
-        return false;
-    }
 }

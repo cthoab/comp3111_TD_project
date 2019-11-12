@@ -1,7 +1,6 @@
 package MapElement.Tower;
 
 import Arena.Resources;
-import MapElement.Monster.Monster;
 
 public class Catapult extends Tower {
     private int reloadTimeLeft;
@@ -42,14 +41,4 @@ public class Catapult extends Tower {
         super(damage, range, UpgradeCost); reloadTimeLeft = 0; reloadTime = 5;
     }
 
-    @Override
-    protected boolean attack(Monster m, Resources resources) {
-        if(reloadTimeLeft > 0)
-            return false;
-        else{
-
-            //TODO
-        }
-        return false;
-    }
 }
