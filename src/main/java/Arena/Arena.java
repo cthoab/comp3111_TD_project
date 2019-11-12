@@ -39,9 +39,18 @@ public class Arena {
     }
 
     public void monsterMove(){
-        for(Monster m : monsters)
-            for(int i = 0; i < m.getSpeed(); i++)
+        for(Monster m : monsters) {
+            for (int i = 0; i < m.getSpeed(); i++)
                 m.move();
+            m.addSurvivedtime();
+            m.evolve();
+        }
+    }
+    public boolean checkGameOver(){
+        for(Monster m : monsters)
+            if(m.getX_position() > 440)
+                return true;
+        return false;
     }
 
 }

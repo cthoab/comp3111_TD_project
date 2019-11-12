@@ -1,5 +1,6 @@
 package MainProgram;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -147,6 +148,8 @@ public class MyController {
         arena.monsterMove();
         arena.spawnMonster();
         drawArena(arena);
+        if(arena.checkGameOver())
+            gameOver();
     }
 
     private void drawArena(Arena a){
@@ -173,6 +176,13 @@ public class MyController {
             MonsterLabel.add(newLabel);
             paneArena.getChildren().addAll(newLabel);
         }
+    }
+
+    public void gameOver(){
+        System.out.println("Gameover");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!");
+        alert.showAndWait();
+        //TODO disable event handlers
     }
 
     /**
