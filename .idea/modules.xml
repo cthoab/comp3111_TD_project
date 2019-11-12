@@ -6,6 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Project.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Project.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Project.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Project.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/comp3111_TD_project.iml" filepath="$PROJECT_DIR$/.idea/modules/comp3111_TD_project.iml" group="comp3111_TD_project" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/comp3111pj.iml" filepath="$PROJECT_DIR$/.idea/modules/comp3111pj.iml" group="comp3111pj" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/comp3111pj_main.iml" filepath="$PROJECT_DIR$/.idea/modules/comp3111pj_main.iml" group="comp3111pj" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/comp3111pj_test.iml" filepath="$PROJECT_DIR$/.idea/modules/comp3111pj_test.iml" group="comp3111pj" />
     </modules>
   </component>
 </project>
