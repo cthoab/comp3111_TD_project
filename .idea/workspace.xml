@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3bf67dac-be6e-4eb8-8fec-b2bdf6b73916" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/comp3111_TD_project_main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/comp3111_TD_project_test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/DragDroppedEventHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/DragEventHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/MyController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Arena/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Arena/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainProgram/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainProgram/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainProgram/MyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainProgram/MyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Tower/BasicTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Tower/BasicTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Tower/Catapult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Tower/Catapult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Tower/IceTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Tower/IceTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Tower/LaserTower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Tower/LaserTower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MapElement/Tower/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MapElement/Tower/Tower.java" afterDir="false" />
-    </list>
+    <list default="true" id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="LAB5" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,64 +27,58 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="application" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build setup" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="distribution" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="documentation" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="comp3111pj" type="f1a62948:ProjectNode" />
                 <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
@@ -158,7 +129,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Project [run]">
+  <component name="RunManager" selected="Gradle.comp3111pj [build]">
     <configuration name="Project [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -235,7 +206,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="comp3111_TD_project" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="comp3111pj [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -245,7 +216,9 @@
           <list />
         </option>
         <option name="taskNames">
-          <list />
+          <list>
+            <option value="build" />
+          </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
@@ -253,19 +226,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.comp3111_TD_project" />
       <item itemvalue="Gradle.Project [run]" />
       <item itemvalue="Gradle.Project [jar]" />
       <item itemvalue="Gradle.Project [clean]" />
       <item itemvalue="Gradle.Project [test]" />
+      <item itemvalue="Gradle.comp3111pj [build]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.comp3111pj [build]" />
+        <item itemvalue="Gradle.Project [run]" />
         <item itemvalue="Gradle.Project [test]" />
         <item itemvalue="Gradle.Project [clean]" />
         <item itemvalue="Gradle.Project [jar]" />
-        <item itemvalue="Gradle.comp3111_TD_project" />
-        <item itemvalue="Gradle.Project [run]" />
       </list>
     </recent_temporary>
   </component>
