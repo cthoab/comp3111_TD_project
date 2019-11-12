@@ -50,7 +50,7 @@ public abstract class Tower extends MapElement {
     }
 
 
-    protected String TowerToString(){
+    public String TowerToString(){
         return "Level: " +
                 level +
                 '\n' +
@@ -59,6 +59,5 @@ public abstract class Tower extends MapElement {
                 '\n' +
                 "Range: ";
     }
-
 
 }

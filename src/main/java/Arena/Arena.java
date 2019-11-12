@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Arena {
 
-    public static final int DefaultResources = 5;
+    public static final int DefaultResources = 500;
     public int Resources = DefaultResources;
     public ArrayList<Monster> monsters = new ArrayList<>();
     public ArrayList<Tower> towers = new ArrayList<>();
@@ -44,28 +44,59 @@ public class Arena {
                 m.move();
     }
 
-    public boolean BuildTower(char T, int row, int col){
+    public boolean BuildTower(char T, int position_x, int position_y){
+        if(TowerAt(position_x,position_y)!=null)            //A tower exist in the given position
+            return false;
         switch (T){
             case 'B' : if (Resources>BasicTower.BuildCost){
-                towers.add(new BasicTower(row*40,col*40));
+                towers.add(new BasicTower(position_x,position_y));
+                Resources -= BasicTower.BuildCost;
                 return true;
             }
             case 'C' : if (Resources>Catapult.BuildCost){
-                towers.add(new Catapult(row*40,col*40));
+                towers.add(new Catapult(position_x,position_y));
+                Resources -= Catapult.BuildCost;
                 return true;
             }
             case 'I' : if (Resources> IceTower.BuildCost){
-                towers.add(new IceTower(row*40,col*40));
+                towers.add(new IceTower(position_x,position_y));
+                Resources -= IceTower.BuildCost;
                 return true;
             }
             case 'L' : if (Resources> LaserTower.BuildCost){
-                towers.add(new LaserTower(row*40,col*40));
+                towers.add(new LaserTower(position_x,position_y));
+                Resources -= LaserTower.BuildCost;
                 return true;
             }
             default: return false;
         }
     }
 
+    public Tower TowerAt (int postion_x, int position_y){
+        for (Tower tower : towers){
+            if (tower.getX_position() == postion_x)
+                if (tower.getY_position() == position_y)
+                    return tower;
+        }
+        return null;
+    }
+
+    public String TowerInfo (int position_x, int position_y){
+        for (Tower tower : towers){
+            if (tower.getX_position() == position_x)
+                if (tower.getY_position() == position_y)
+                    return tower.TowerToString();
+        }
+        return null;
+    }
+
+    public boolean RemoveTower (int position_x, int position_y){
+        if (TowerAt(position_x,position_y)!=null){
+            towers.remove(TowerAt(position_x,position_y));
+            return true;
+        }
+        return true;
+    }
 
 
 

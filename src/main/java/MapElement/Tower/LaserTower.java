@@ -9,7 +9,7 @@ public class LaserTower extends Tower {
 
 
     public LaserTower(int x, int y) {
-        super(DefaultPower,-1, BuildCost);
+        super(DefaultPower,2000, BuildCost);
         attackCost = DefaultAttackCost;
         setX_position(x);
         setY_position(y);

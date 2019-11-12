@@ -30,7 +30,7 @@ public class Catapult extends Tower {
     }
 
     public Catapult(int x, int y) {
-        super(DefaultPower, -1, BuildCost); reloadTimeLeft = 0; reloadTime = DefaultReloadTime;
+        super(DefaultPower, DefaultOuterRange, BuildCost); reloadTimeLeft = 0; reloadTime = DefaultReloadTime;
         setX_position(x);
         setY_position(y);
     }
