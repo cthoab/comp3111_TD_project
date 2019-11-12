@@ -1,22 +1,25 @@
 package Arena;
 
 
-import MapElement.MapElement;
-import MapElement.Monster.*;
-import MapElement.Tower.Tower;
-import java.util.Random;
-
+import MapElement.Monster.Fox;
+import MapElement.Monster.Monster;
+import MapElement.Monster.Penguin;
+import MapElement.Monster.Unicorn;
+import MapElement.Tower.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Arena {
 
-
-    public ArrayList<Monster> monsters = new ArrayList<Monster>();
-    public ArrayList<Tower> towers = new ArrayList<Tower>();
+    public static final int DefaultResources = 5;
+    public int Resources = DefaultResources;
+    public ArrayList<Monster> monsters = new ArrayList<>();
+    public ArrayList<Tower> towers = new ArrayList<>();
 
 
     public Arena(){
+
     }
 
     public void spawnMonster(){
@@ -40,5 +43,30 @@ public class Arena {
             for(int i=0; i<m.getSpeed(); i++)
                 m.move();
     }
+
+    public boolean BuildTower(char T, int row, int col){
+        switch (T){
+            case 'B' : if (Resources>BasicTower.BuildCost){
+                towers.add(new BasicTower(row*40,col*40));
+                return true;
+            }
+            case 'C' : if (Resources>Catapult.BuildCost){
+                towers.add(new Catapult(row*40,col*40));
+                return true;
+            }
+            case 'I' : if (Resources> IceTower.BuildCost){
+                towers.add(new IceTower(row*40,col*40));
+                return true;
+            }
+            case 'L' : if (Resources> LaserTower.BuildCost){
+                towers.add(new LaserTower(row*40,col*40));
+                return true;
+            }
+            default: return false;
+        }
+    }
+
+
+
 
 }
