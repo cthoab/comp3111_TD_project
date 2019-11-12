@@ -145,6 +145,7 @@ public class MyController {
 
     @FXML
     private void nextFrame() {
+        arena.removeDeadMonsters();
         arena.monsterMove();
         arena.spawnMonster();
         drawArena(arena);
@@ -179,7 +180,9 @@ public class MyController {
                 paneArena.getChildren().remove(info);
             });
             Image image;
-            if(m.getClass() == Fox.class)
+            if(m.getHP() <= 0)
+                image = new Image("file:src/main/resources/collision20x20.png");
+            else if(m.getClass() == Fox.class)
                 image = new Image("file:src/main/resources/fox20x20.png");
             else if(m.getClass() == Penguin.class)
                 image = new Image("file:src/main/resources/penguin20x20.png");

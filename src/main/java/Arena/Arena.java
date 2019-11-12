@@ -44,13 +44,23 @@ public class Arena {
                 m.move();
             m.addSurvivedtime();
             m.evolve();
+            if(m.getClass() == Penguin.class)
+                ((Penguin)m).replenish();
         }
     }
+
     public boolean checkGameOver(){
         for(Monster m : monsters)
-            if(m.getX_position() > 440)
+            if(m.getX_position() > 440 && m.getHP()>0)
                 return true;
         return false;
+    }
+
+    public void removeDeadMonsters(){
+        for(Monster m : monsters){
+            if(m.getHP() <= 0)
+                monsters.remove(m);
+        }
     }
 
     public boolean BuildTower(char T, int row, int col){
