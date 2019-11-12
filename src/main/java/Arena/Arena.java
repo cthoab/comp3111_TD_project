@@ -1,13 +1,16 @@
 package Arena;
 
+
 import MapElement.MapElement;
 import MapElement.Monster.*;
 import MapElement.Tower.Tower;
 import java.util.Random;
 
+
 import java.util.ArrayList;
 
 public class Arena {
+
 
     public ArrayList<Monster> monsters = new ArrayList<Monster>();
     public ArrayList<Tower> towers = new ArrayList<Tower>();
@@ -29,6 +32,7 @@ public class Arena {
             case 2:
                 monsters.add(new Unicorn());
         }
+
     }
 
     public void monsterMove(){
