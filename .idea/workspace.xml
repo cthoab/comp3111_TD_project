@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="LAB5">
+    <list default="true" id="e75b3f7e-e96f-40d0-aaf5-678c22f05a35" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Arena/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Arena/Arena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainProgram/MyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainProgram/MyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/towerDefence-0.1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/towerDefence-0.1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -280,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573553502716</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="myController setting changes">
+      <created>1573555781510</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573555781510</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -333,7 +342,8 @@
     <MESSAGE value="Changes on IceTower" />
     <MESSAGE value="Changes on BuildResources" />
     <MESSAGE value="LAB5" />
-    <option name="LAST_COMMIT_MESSAGE" value="LAB5" />
+    <MESSAGE value="myController setting changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="myController setting changes" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />

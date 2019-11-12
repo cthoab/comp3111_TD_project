@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import Arena.Arena;
 import MapElement.Monster.*;
+import javafx.scene.shape.Circle;
 
 public class MyController {
     @FXML
@@ -47,12 +48,17 @@ public class MyController {
     @FXML
     private Label labelLaserTower;
 
+    @FXML
+    private Label labelResource;
+
     private static final int ARENA_WIDTH = 480;
     private static final int ARENA_HEIGHT = 480;
     private static final int GRID_WIDTH = 40;
     private static final int GRID_HEIGHT = 40;
     private static final int MAX_H_NUM_GRID = 12;
     private static final int MAX_V_NUM_GRID = 12;
+    Boolean clicked = false;
+    Circle circle = new Circle();
 
     private Label grids[][] = new Label[MAX_V_NUM_GRID][MAX_H_NUM_GRID]; //the grids on arena
     private int x = -1, y = 0; //where is my monster
@@ -66,7 +72,6 @@ public class MyController {
     @FXML
     private void play() {
         System.out.println("Play button clicked");
-        arena = new Arena();
         arena.spawnMonster();
         drawArena(arena);
     }
@@ -76,13 +81,48 @@ public class MyController {
      */
     @FXML
     public void createArena() {
+        arena = new Arena();
         if (grids[0][0] != null)
             return; //created already
         for (int i = 0; i < MAX_V_NUM_GRID; i++)
             for (int j = 0; j < MAX_H_NUM_GRID; j++) {
                 Label newLabel = new Label();
-                if (isGreen(i,j))
+                if (isGreen(i,j)) {
                     newLabel.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+
+                    newLabel.setOnMouseClicked(event -> {
+                        if(newLabel.getText()!="Drop\nHere") { //clicking tower
+
+                            System.out.println(newLabel.getText() + " clicking");
+                                if(!clicked) {
+                                    circle.setCenterX(newLabel.getLayoutX()+GRID_WIDTH/2);
+                                    circle.setCenterY(newLabel.getLayoutY()+GRID_HEIGHT/2);
+                                    circle.setRadius(2 * 40);
+                                    circle.setFill(Color.TRANSPARENT);
+                                    circle.setStroke(Color.GREEN);
+                                    circle.setMouseTransparent(true);
+                                    circle.setVisible(true);
+                                    circle.managedProperty().bind(circle.visibleProperty());
+                                    System.out.println("clicked");
+                                    clicked = true;
+                                }
+                                else {
+                                    circle.setVisible(false);
+                                    clicked = false;
+                                }
+
+                        }
+                        else
+                        {
+                            circle.setVisible(false);
+                            circle.managedProperty().bind(circle.visibleProperty());
+                            clicked = false;
+                            System.out.println(newLabel.getText() + " clicking");
+                        }
+                    });
+
+
+                }
                 else
                     newLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                 newLabel.setLayoutX(j * GRID_WIDTH);
@@ -97,6 +137,9 @@ public class MyController {
                 if(isGreen(i,j))
                     setDragAndDrop(i, j);
             }
+            Label resource = labelResource;
+            resource.setText(Integer.toString(arena.getResources().getResources()));
+            paneArena.getChildren().add(circle);
     }
 
     @FXML
@@ -244,4 +287,5 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
         event.setDropCompleted(success);
         event.consume();
     }
+
 }
