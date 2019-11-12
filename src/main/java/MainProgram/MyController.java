@@ -139,7 +139,7 @@ public class MyController {
                     setDragAndDrop(i, j);
             }
             Label resource = labelResource;
-            resource.setText(Integer.toString(arena.getResources().getResources()));
+            resource.setText(Integer.toString(arena.Resources));
             paneArena.getChildren().add(circle);
     }
 
@@ -165,6 +165,19 @@ public class MyController {
             newLabel.setMinHeight(GRID_WIDTH / 2);
             newLabel.setMaxHeight(GRID_WIDTH / 2);
             newLabel.setStyle("-fx-border-color: none;");
+            Label info = new Label();
+            newLabel.setOnMouseEntered(e->{
+                info.setText("HP: " + Integer.toString(m.getHP()));
+                info.setLayoutX(m.getX_position()+10);
+                info.setLayoutY(m.getY_position()-10);
+                info.setStyle("-fx-background-color: yellow; -fx-font: 20 arial");
+                info.setMinHeight(30);
+                info.setMinWidth(40);
+                paneArena.getChildren().add(info);
+            });
+            newLabel.setOnMouseExited(e->{
+                paneArena.getChildren().remove(info);
+            });
             Image image;
             if(m.getClass() == Fox.class)
                 image = new Image("file:src/main/resources/fox20x20.png");
