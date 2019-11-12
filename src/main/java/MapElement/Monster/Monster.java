@@ -28,8 +28,8 @@ public abstract class Monster extends MapElement {
     };
     public void evolve(){
         if(survivedtime % 5 == 0) {
-            hp = (int) Math.round(hp * 1.5);
-            speed = (int) Math.round(speed * 1.5);
+            hp += 2;
+            speed += 10;
         }
     };
 
