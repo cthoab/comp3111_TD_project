@@ -51,7 +51,7 @@ public class Arena {
 
     public boolean checkGameOver(){
         for(Monster m : monsters)
-            if(m.getX_position() > 440 && m.getHP()>0)
+            if(m.getX_position() >= 440 && m.getHP()>0)
                 return true;
         return false;
     }
