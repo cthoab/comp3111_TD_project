@@ -117,6 +117,16 @@ public class Arena {
         return true;
     }
 
+    public boolean UpgradeTower (int position_x, int position_y){
+        Tower tower = TowerAt(position_x, position_y);
+        if (tower.getUpgradeCost()<Resources){
+            Resources -= tower.getUpgradeCost();
+            tower.upgrade();
+            return true;
+        }
+        return false;
+    }
+
 
 
 }

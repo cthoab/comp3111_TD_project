@@ -5,6 +5,7 @@ import MapElement.Tower.Catapult;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import javafx.scene.control.Menu;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.event.*;
@@ -101,31 +102,10 @@ public class MyController {
 
                     newLabel.setOnMouseClicked(event -> {
                         if(newLabel.getText()!="Drop\nHere") { //clicking tower
-//                            int range = arena.TowerAt((int)newLabel.getLayoutX(),(int)newLabel.getLayoutY()).getRange();
                             System.out.println(newLabel.getText() + " clicking");
-//                                if(!clicked) {
-//                                    DrawCircle(circle_outer,newLabel.getLayoutX()+GRID_WIDTH/2,
-//                                            newLabel.getLayoutY()+GRID_HEIGHT/2,range,range<1500);
-//                                    if(newLabel.getText().equals("Catapult"))
-//                                        DrawCircle(circle_inner,newLabel.getLayoutX()+GRID_WIDTH/2,
-//                                                newLabel.getLayoutY()+GRID_HEIGHT/2, Catapult.DefaultInnerRange,true);
-//                                    System.out.println("clicked");
-//                                    clicked = true;
-//                                }
-//                                else {
-//                                    circle_outer.setVisible(false);
-//                                    circle_inner.setVisible(false);
-//                                    clicked = false;
-//                                }
-
                         }
                         else
                         {
-//                            circle_outer.setVisible(false);
-//                            circle_inner.setVisible(false);
-//                            circle_outer.managedProperty().bind(circle_outer.visibleProperty());
-//                            circle_inner.managedProperty().bind(circle_inner.visibleProperty());
-//                            clicked = false;
                             System.out.println(newLabel.getText() + " clicking");
                         }
                     });
@@ -207,6 +187,7 @@ public class MyController {
         System.out.println("Gameover");
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!");
         alert.showAndWait();
+
         //TODO disable event handlers
     }
 
@@ -289,10 +270,34 @@ class DragEventHandler implements EventHandler<MouseEvent> {
         event.consume();
     }
 }
+
+class ShowClickMenuHandler implements EventHandler<MouseEvent>{
+
+    AnchorPane anchorPane;
+    Label target;
+    Arena arena;
+    Menu menu;
+
+    public ShowClickMenuHandler(AnchorPane anchorPane, Label target, Arena arena){
+        this.anchorPane = anchorPane; this.target = target; this.arena = arena;
+    }
+
+    @Override
+    public void handle(MouseEvent event) {
+
+
+    }
+}
+
+
+
 class DragDroppedEventHandler implements EventHandler<DragEvent> {
     Arena arena;
     AnchorPane anchorPane;
     Label LabelResources;
+    Label InfoLabel;
+    Circle Inner = new Circle();
+    Circle Outer = new Circle();
 
     DragDroppedEventHandler(Arena arena, AnchorPane anchorPane, Label LabelResources){
         this.arena = arena;
@@ -301,10 +306,11 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
     }
 
     private void setUpTowerInfoLabel(Label Target, int position_x, int position_y){
+        InfoLabel = new Label(arena.TowerInfo(position_x, position_y));
         Target.setOnMouseEntered(
                 new MouseEnterShowInfoHandler(
-                        anchorPane, new Label(arena.TowerInfo(position_x,position_y)), Target, arena.TowerAt(position_x,position_y).getRange()));
-        Target.setOnMouseExited(new MouseExitDismissInfoHandler(anchorPane));
+                        anchorPane, InfoLabel, Target, arena.TowerAt(position_x,position_y).getRange(),Inner,Outer));
+        Target.setOnMouseExited(new MouseExitDismissInfoHandler(anchorPane,Inner,Outer,InfoLabel));
     }
 
     private void ShowAlert(int position_x, int position_y){
@@ -379,8 +385,8 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     Label infoLabel;
     Label thisLabel;
     int range;
-    Circle circle_outer = new Circle();
-    Circle circle_inner = new Circle();
+    Circle circle_outer;
+    Circle circle_inner;
 
     private void DrawCircle (Circle circle, double center_x,double center_y, int radius, boolean visible){
         circle.setCenterX(center_x);
@@ -394,11 +400,13 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     }
 
 
-    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel, int range){
+    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel, int range, Circle inner, Circle outer){
         this.anchorPane = anchorPane;
         this.infoLabel = infoLabel;
         this.thisLabel = thisLabel;
         this.range = range;
+        this.circle_inner = inner;
+        this.circle_outer = outer;
     }
 
     @Override
@@ -412,10 +420,9 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
             DrawCircle(circle_inner,thisLabel.getLayoutX()+MyController.GRID_WIDTH/2,
                     thisLabel.getLayoutY()+MyController.GRID_HEIGHT/2, Catapult.DefaultInnerRange,true);
 
-        anchorPane.getChildren().add(infoLabel);
         anchorPane.getChildren().add(circle_inner);
         anchorPane.getChildren().add(circle_outer);
-
+        anchorPane.getChildren().add(infoLabel);
 
         event.consume();
     }
@@ -423,16 +430,23 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
 
 class MouseExitDismissInfoHandler implements EventHandler<MouseEvent>{
     AnchorPane anchorPane;
+    Label InfoLabel;
+    Circle Inner;
+    Circle Outer;
 
-    MouseExitDismissInfoHandler(AnchorPane anchorPane){
+    MouseExitDismissInfoHandler(AnchorPane anchorPane,Circle Inner,Circle Outer,Label InfoLabel){
         this.anchorPane = anchorPane;
+        this.InfoLabel = InfoLabel;
+        this.Inner = Inner;
+        this.Outer = Outer;
     }
 
     @Override
     public void handle(MouseEvent event) {
-        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
-        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
-        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+        anchorPane.getChildren().removeAll(Inner,Outer,InfoLabel);
+//        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+//        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+//        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
 
 
     }
