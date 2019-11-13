@@ -50,8 +50,8 @@ public class MyController {
 
     private static final int ARENA_WIDTH = 480;
     private static final int ARENA_HEIGHT = 480;
-    private static final int GRID_WIDTH = 40;
-    private static final int GRID_HEIGHT = 40;
+    protected static final int GRID_WIDTH = 40;
+    protected static final int GRID_HEIGHT = 40;
     private static final int MAX_H_NUM_GRID = 12;
     private static final int MAX_V_NUM_GRID = 12;
     boolean clicked = false;
@@ -75,16 +75,6 @@ public class MyController {
         drawArena(arena);
     }
 
-    private void DrawCircle (Circle circle, double center_x,double center_y, int radius, boolean visible){
-        circle.setCenterX(center_x);
-        circle.setCenterY(center_y);
-        circle.setRadius(radius);
-        circle.setFill(Color.TRANSPARENT);
-        circle.setStroke(Color.GREEN);
-        circle.setMouseTransparent(true);
-        circle.setVisible(visible);
-        circle.managedProperty().bind(circle.visibleProperty());
-    }
 
     /**
      * A function that create the Arena
@@ -111,31 +101,31 @@ public class MyController {
 
                     newLabel.setOnMouseClicked(event -> {
                         if(newLabel.getText()!="Drop\nHere") { //clicking tower
-                            int range = arena.TowerAt((int)newLabel.getLayoutX(),(int)newLabel.getLayoutY()).getRange();
+//                            int range = arena.TowerAt((int)newLabel.getLayoutX(),(int)newLabel.getLayoutY()).getRange();
                             System.out.println(newLabel.getText() + " clicking");
-                                if(!clicked) {
-                                    DrawCircle(circle_outer,newLabel.getLayoutX()+GRID_WIDTH/2,
-                                            newLabel.getLayoutY()+GRID_HEIGHT/2,range,range<1500);
-                                    if(newLabel.getText().equals("Catapult"))
-                                        DrawCircle(circle_inner,newLabel.getLayoutX()+GRID_WIDTH/2,
-                                                newLabel.getLayoutY()+GRID_HEIGHT/2, Catapult.DefaultInnerRange,true);
-                                    System.out.println("clicked");
-                                    clicked = true;
-                                }
-                                else {
-                                    circle_outer.setVisible(false);
-                                    circle_inner.setVisible(false);
-                                    clicked = false;
-                                }
+//                                if(!clicked) {
+//                                    DrawCircle(circle_outer,newLabel.getLayoutX()+GRID_WIDTH/2,
+//                                            newLabel.getLayoutY()+GRID_HEIGHT/2,range,range<1500);
+//                                    if(newLabel.getText().equals("Catapult"))
+//                                        DrawCircle(circle_inner,newLabel.getLayoutX()+GRID_WIDTH/2,
+//                                                newLabel.getLayoutY()+GRID_HEIGHT/2, Catapult.DefaultInnerRange,true);
+//                                    System.out.println("clicked");
+//                                    clicked = true;
+//                                }
+//                                else {
+//                                    circle_outer.setVisible(false);
+//                                    circle_inner.setVisible(false);
+//                                    clicked = false;
+//                                }
 
                         }
                         else
                         {
-                            circle_outer.setVisible(false);
-                            circle_inner.setVisible(false);
-                            circle_outer.managedProperty().bind(circle_outer.visibleProperty());
-                            circle_inner.managedProperty().bind(circle_inner.visibleProperty());
-                            clicked = false;
+//                            circle_outer.setVisible(false);
+//                            circle_inner.setVisible(false);
+//                            circle_outer.managedProperty().bind(circle_outer.visibleProperty());
+//                            circle_inner.managedProperty().bind(circle_inner.visibleProperty());
+//                            clicked = false;
                             System.out.println(newLabel.getText() + " clicking");
                         }
                     });
@@ -313,7 +303,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
     private void setUpTowerInfoLabel(Label Target, int position_x, int position_y){
         Target.setOnMouseEntered(
                 new MouseEnterShowInfoHandler(
-                        anchorPane, new Label(arena.TowerInfo(position_x,position_y)), Target));
+                        anchorPane, new Label(arena.TowerInfo(position_x,position_y)), Target, arena.TowerAt(position_x,position_y).getRange()));
         Target.setOnMouseExited(new MouseExitDismissInfoHandler(anchorPane));
     }
 
@@ -388,11 +378,27 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     AnchorPane anchorPane;
     Label infoLabel;
     Label thisLabel;
+    int range;
+    Circle circle_outer = new Circle();
+    Circle circle_inner = new Circle();
 
-    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel){
+    private void DrawCircle (Circle circle, double center_x,double center_y, int radius, boolean visible){
+        circle.setCenterX(center_x);
+        circle.setCenterY(center_y);
+        circle.setRadius(radius);
+        circle.setFill(Color.TRANSPARENT);
+        circle.setStroke(Color.GREEN);
+        circle.setMouseTransparent(true);
+        circle.setVisible(visible);
+        circle.managedProperty().bind(circle.visibleProperty());
+    }
+
+
+    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel, int range){
         this.anchorPane = anchorPane;
         this.infoLabel = infoLabel;
         this.thisLabel = thisLabel;
+        this.range = range;
     }
 
     @Override
@@ -400,7 +406,17 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
         infoLabel.setLayoutX(thisLabel.getLayoutX()+40);
         infoLabel.setLayoutY(thisLabel.getLayoutY());
         infoLabel.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
+        DrawCircle(circle_outer,thisLabel.getLayoutX()+MyController.GRID_WIDTH/2,
+                thisLabel.getLayoutY()+MyController.GRID_HEIGHT/2,range,range<1500);
+        if(thisLabel.getText().equals("Catapult"))
+            DrawCircle(circle_inner,thisLabel.getLayoutX()+MyController.GRID_WIDTH/2,
+                    thisLabel.getLayoutY()+MyController.GRID_HEIGHT/2, Catapult.DefaultInnerRange,true);
+
         anchorPane.getChildren().add(infoLabel);
+        anchorPane.getChildren().add(circle_inner);
+        anchorPane.getChildren().add(circle_outer);
+
+
         event.consume();
     }
 }
@@ -415,5 +431,9 @@ class MouseExitDismissInfoHandler implements EventHandler<MouseEvent>{
     @Override
     public void handle(MouseEvent event) {
         anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+        anchorPane.getChildren().remove(anchorPane.getChildren().size()-1);
+
+
     }
 }
