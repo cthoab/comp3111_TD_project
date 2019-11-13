@@ -16,8 +16,10 @@ public abstract class Monster extends MapElement {
     public void setSpeed(int speed){ this.speed = speed; }
 
     public void move(){
+        if(this.getX_position()>=440)
+            return;
         //move down
-        if((this.getX_position()-20)%160 == 0 && this.getY_position()>=20 && this.getY_position()<460)
+        else if((this.getX_position()-20)%160 == 0 && this.getY_position()>=20 && this.getY_position()<460)
             setY_position(getY_position()+1);
         //move up
         else if ((this.getX_position()-100)%160 == 0 && this.getY_position()>20 && this.getY_position()<=460)
