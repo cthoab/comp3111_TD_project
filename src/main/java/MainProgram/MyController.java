@@ -1,11 +1,9 @@
 package MainProgram;
 
-import javafx.scene.control.Alert;
+import MapElement.Tower.Tower;
+import javafx.scene.control.*;
 import MapElement.Tower.Catapult;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
-import javafx.scene.control.Menu;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.event.*;
@@ -35,6 +33,9 @@ public class MyController {
     private AnchorPane paneArena;
 
     @FXML
+    private AnchorPane controlPanel;
+
+    @FXML
     private Label labelBasicTower;
 
     @FXML
@@ -47,7 +48,7 @@ public class MyController {
     private Label labelLaserTower;
 
     @FXML
-    private Label labelResource;
+    private Label labelResource = new Label();
 
     private static final int ARENA_WIDTH = 480;
     private static final int ARENA_HEIGHT = 480;
@@ -59,6 +60,7 @@ public class MyController {
     Circle circle_outer = new Circle();
     Circle circle_inner = new Circle();
     Label infoLabel = new Label();
+
 
     private Label grids[][] = new Label[MAX_V_NUM_GRID][MAX_H_NUM_GRID]; //the grids on arena
     private int x = -1, y = 0; //where is my monster
@@ -94,6 +96,12 @@ public class MyController {
         source3.setOnDragDetected(new DragEventHandler(source3));
         source4.setOnDragDetected(new DragEventHandler(source4));
 
+        labelResource.textProperty().bind(arena.Resources.asString());
+        labelResource.setLayoutX(17);
+        labelResource.setLayoutY(409);
+        controlPanel.getChildren().add(labelResource);
+
+
         for (int i = 0; i < MAX_V_NUM_GRID; i++)
             for (int j = 0; j < MAX_H_NUM_GRID; j++) {
                 Label newLabel = new Label();
@@ -109,8 +117,6 @@ public class MyController {
                             System.out.println(newLabel.getText() + " clicking");
                         }
                     });
-
-
                 }
                 else
                     newLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -126,8 +132,8 @@ public class MyController {
                 if(isGreen(i,j))
                     setDragAndDrop(i, j);
             }
-            Label resource = labelResource;
-            resource.setText(Integer.toString(arena.Resources));
+//            Label resource = labelResource;
+//            resource.setText(Integer.toString(arena.Resources.get()));
             paneArena.getChildren().add(circle_outer);
             paneArena.getChildren().add(circle_inner);
     }
@@ -186,6 +192,16 @@ public class MyController {
     public void gameOver(){
         System.out.println("Gameover");
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!");
+        for(Label[] Grids : grids)
+            for(Label grid : Grids){
+                grid.setOnMouseClicked(null);
+                grid.setOnDragDetected(null);
+                grid.setContextMenu(null);
+                grid.setOnMouseEntered(null);
+            }
+        for (Label monster: MonsterLabel){
+            monster.setOnMouseEntered(null);
+        }
         alert.showAndWait();
 
         //TODO disable event handlers
@@ -204,17 +220,17 @@ public class MyController {
     private void setDragAndDrop(int row, int col) {
         Label target = grids[row][col];
         target.setText("Drop\nHere");
-        Label source1 = labelBasicTower;
-        Label source2 = labelIceTower;
-        Label source3 = labelCatapult;
-        Label source4 = labelLaserTower;
-        double orgSceneX, orgSceneY;
-        double orgTranslateX, orgTranslateY;
-        source1.setOnDragDetected(new DragEventHandler(source1));
-        source2.setOnDragDetected(new DragEventHandler(source2));
-        source3.setOnDragDetected(new DragEventHandler(source3));
-        source4.setOnDragDetected(new DragEventHandler(source4));
-        target.setOnDragDropped(new DragDroppedEventHandler(arena,paneArena,labelResource));
+//        Label source1 = labelBasicTower;
+//        Label source2 = labelIceTower;
+//        Label source3 = labelCatapult;
+//        Label source4 = labelLaserTower;
+////        double orgSceneX, orgSceneY;
+////        double orgTranslateX, orgTranslateY;
+//        source1.setOnDragDetected(new DragEventHandler(source1));
+//        source2.setOnDragDetected(new DragEventHandler(source2));
+//        source3.setOnDragDetected(new DragEventHandler(source3));
+//        source4.setOnDragDetected(new DragEventHandler(source4));
+        target.setOnDragDropped(new DragDroppedEventHandler(arena,paneArena));
         //well, you can also write anonymous class or even lambda
         //Anonymous class
         target.setOnDragOver(new EventHandler <DragEvent>() {
@@ -254,6 +270,9 @@ public class MyController {
             event.consume();
         });
     }
+
+
+
 }
 
 class DragEventHandler implements EventHandler<MouseEvent> {
@@ -273,19 +292,54 @@ class DragEventHandler implements EventHandler<MouseEvent> {
 
 class ShowClickMenuHandler implements EventHandler<MouseEvent>{
 
-    AnchorPane anchorPane;
     Label target;
     Arena arena;
-    Menu menu;
+    AnchorPane anchorPane;
+    MenuItem UpgradeTower = new MenuItem("Upgrade the Tower");
+    MenuItem DestroyTower = new MenuItem("Destroy The Tower");
 
-    public ShowClickMenuHandler(AnchorPane anchorPane, Label target, Arena arena){
-        this.anchorPane = anchorPane; this.target = target; this.arena = arena;
+
+    public ShowClickMenuHandler(Label target, Arena arena, AnchorPane anchorPane){
+        this.target = target; this.arena = arena; this.anchorPane = anchorPane;
     }
 
     @Override
     public void handle(MouseEvent event) {
-
-
+        ContextMenu menu = new ContextMenu();
+        menu.getItems().addAll(UpgradeTower,DestroyTower);
+        UpgradeTower.setOnAction(e->{
+            Alert alert;
+            if(arena.UpgradeTower((int)target.getLayoutX()+MyController.GRID_WIDTH/2,(int)target.getLayoutY()+MyController.GRID_HEIGHT/2))
+                alert = new Alert(Alert.AlertType.INFORMATION, "Upgraded!");
+            else
+                alert = new Alert(Alert.AlertType.INFORMATION,"Not enough resources!");
+            alert.showAndWait();
+            System.out.println(arena.Resources);
+            System.out.println(arena.TowerInfo((int)target.getLayoutX()+MyController.GRID_WIDTH/2,(int)target.getLayoutY()+MyController.GRID_HEIGHT/2));
+        });
+        DestroyTower.setOnAction(e->{
+            target.setOnMouseEntered(null);
+            target.setContextMenu(null);
+            target.setGraphic(null);
+            target.setText("Drop\nHere");
+            target.setOnDragDropped(new DragDroppedEventHandler(arena,anchorPane));
+            target.setOnDragEntered(event1 -> {
+                System.out.println("onDragEntered");
+                if (event1.getGestureSource() != target &&
+                        event1.getDragboard().hasString()) {
+                    target.setStyle("-fx-border-color: blue;");
+                }
+                event1.consume();
+            });
+            target.setOnDragExited((event2) -> {
+                /* mouse moved away, remove the graphical cues */
+                target.setStyle("-fx-border-color: black;");
+                System.out.println("Exit");
+                event2.consume();
+            });
+            arena.RemoveTower((int)target.getLayoutX()+MyController.GRID_WIDTH/2,(int)target.getLayoutY()+MyController.GRID_HEIGHT/2);
+        });
+        target.setContextMenu(menu);
     }
 }
 
@@ -294,22 +348,20 @@ class ShowClickMenuHandler implements EventHandler<MouseEvent>{
 class DragDroppedEventHandler implements EventHandler<DragEvent> {
     Arena arena;
     AnchorPane anchorPane;
-    Label LabelResources;
     Label InfoLabel;
     Circle Inner = new Circle();
     Circle Outer = new Circle();
 
-    DragDroppedEventHandler(Arena arena, AnchorPane anchorPane, Label LabelResources){
+    DragDroppedEventHandler(Arena arena, AnchorPane anchorPane){
         this.arena = arena;
         this.anchorPane = anchorPane;
-        this.LabelResources = LabelResources;
     }
 
     private void setUpTowerInfoLabel(Label Target, int position_x, int position_y){
-        InfoLabel = new Label(arena.TowerInfo(position_x, position_y));
+        InfoLabel = new Label();  //Problem here
         Target.setOnMouseEntered(
                 new MouseEnterShowInfoHandler(
-                        anchorPane, InfoLabel, Target, arena.TowerAt(position_x,position_y).getRange(),Inner,Outer));
+                        anchorPane, InfoLabel, Target, arena.TowerAt(position_x,position_y),Inner,Outer));
         Target.setOnMouseExited(new MouseExitDismissInfoHandler(anchorPane,Inner,Outer,InfoLabel));
     }
 
@@ -331,9 +383,8 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
         if (db.hasString()) {
             success = true;
             Image image;
-            Alert alert;
-            int position_x = (int) ((Label) event.getGestureTarget()).getLayoutX();
-            int position_y = (int) ((Label) event.getGestureTarget()).getLayoutY();
+            int position_x = (int) ((Label) event.getGestureTarget()).getLayoutX() + MyController.GRID_WIDTH/2;
+            int position_y = (int) ((Label) event.getGestureTarget()).getLayoutY() + MyController.GRID_HEIGHT/2;
             switch (db.getString()){
                 case "Basic Tower":
                     if(arena.BuildTower('B',position_x,position_y)) {
@@ -341,15 +392,17 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         image = new Image("file:src/main/resources/basicTower40x40.png");
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
+                        ((Label) event.getGestureTarget()).setOnMouseClicked(new ShowClickMenuHandler((Label) event.getGestureTarget(),arena,anchorPane));
                     }
                     else ShowAlert(position_x, position_y);
                     break;
                 case "Ice Tower":
-                    if(arena.BuildTower('I',position_x,position_y)) {
+                    if(arena.BuildTower('I',position_x ,position_y)) {
                         ((Label)event.getGestureTarget()).setText(db.getString());
                         image = new Image("file:src/main/resources/iceTower40x40.png");
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
+                        ((Label) event.getGestureTarget()).setOnMouseClicked(new ShowClickMenuHandler((Label) event.getGestureTarget(),arena,anchorPane));
                     }
                     else ShowAlert(position_x,position_y);
                     break;
@@ -359,6 +412,7 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         image = new Image("file:src/main/resources/catapult40x40.png");
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
+                        ((Label) event.getGestureTarget()).setOnMouseClicked(new ShowClickMenuHandler((Label) event.getGestureTarget(),arena,anchorPane));
                     }
                     else ShowAlert(position_x,position_y);
                     break;
@@ -368,13 +422,14 @@ class DragDroppedEventHandler implements EventHandler<DragEvent> {
                         image = new Image("file:src/main/resources/laserTower40x40.png");
                         ((Label) event.getGestureTarget()).setGraphic(new ImageView(image));
                         setUpTowerInfoLabel((Label) event.getGestureTarget(),position_x,position_y);
+                        ((Label) event.getGestureTarget()).setOnMouseClicked(new ShowClickMenuHandler((Label) event.getGestureTarget(),arena,anchorPane));
                     }
                     else ShowAlert(position_x,position_y);
                     break;
             }
         }
-        System.out.println("Resources left: "+ arena.Resources);
-        LabelResources.setText(String.valueOf(arena.Resources));
+//        System.out.println("Resources left: "+ arena.Resources);
+//        LabelResources.setText(String.valueOf(arena.Resources));
         event.setDropCompleted(success);
         event.consume();
     }
@@ -384,6 +439,7 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     AnchorPane anchorPane;
     Label infoLabel;
     Label thisLabel;
+    Tower tower;
     int range;
     Circle circle_outer;
     Circle circle_inner;
@@ -400,17 +456,19 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     }
 
 
-    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel, int range, Circle inner, Circle outer){
+    MouseEnterShowInfoHandler(AnchorPane anchorPane, Label infoLabel, Label thisLabel, Tower tower, Circle inner, Circle outer){
         this.anchorPane = anchorPane;
         this.infoLabel = infoLabel;
         this.thisLabel = thisLabel;
-        this.range = range;
+        this.tower = tower;
+        this.range = tower.getRange();
         this.circle_inner = inner;
         this.circle_outer = outer;
     }
 
     @Override
     public void handle(MouseEvent event) {
+        infoLabel.setText(tower.TowerToString());
         infoLabel.setLayoutX(thisLabel.getLayoutX()+40);
         infoLabel.setLayoutY(thisLabel.getLayoutY());
         infoLabel.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));

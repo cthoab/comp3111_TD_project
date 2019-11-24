@@ -6,6 +6,8 @@ import MapElement.Monster.Monster;
 import MapElement.Monster.Penguin;
 import MapElement.Monster.Unicorn;
 import MapElement.Tower.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +15,7 @@ import java.util.Random;
 public class Arena {
 
     public static final int DefaultResources = 500;
-    public int Resources = DefaultResources;
+    public SimpleIntegerProperty Resources = new SimpleIntegerProperty(DefaultResources);
     public ArrayList<Monster> monsters = new ArrayList<>();
     public ArrayList<Tower> towers = new ArrayList<>();
 
@@ -67,33 +69,33 @@ public class Arena {
         if(TowerAt(position_x,position_y)!=null)            //A tower exist in the given position
             return false;
         switch (T){
-            case 'B' : if (Resources>BasicTower.BuildCost){
+            case 'B' : if (Resources.get()>BasicTower.BuildCost){
                 towers.add(new BasicTower(position_x,position_y));
-                Resources -= BasicTower.BuildCost;
+                Resources.set(Resources.get() - BasicTower.BuildCost);
                 return true;
             }
-            case 'C' : if (Resources>Catapult.BuildCost){
+            case 'C' : if (Resources.get()>Catapult.BuildCost){
                 towers.add(new Catapult(position_x,position_y));
-                Resources -= Catapult.BuildCost;
+                Resources.set(Resources.get() - Catapult.BuildCost);
                 return true;
             }
-            case 'I' : if (Resources> IceTower.BuildCost){
+            case 'I' : if (Resources.get()> IceTower.BuildCost){
                 towers.add(new IceTower(position_x,position_y));
-                Resources -= IceTower.BuildCost;
+                Resources.set(Resources.get() - IceTower.BuildCost);
                 return true;
             }
-            case 'L' : if (Resources> LaserTower.BuildCost){
+            case 'L' : if (Resources.get()> LaserTower.BuildCost){
                 towers.add(new LaserTower(position_x,position_y));
-                Resources -= LaserTower.BuildCost;
+                Resources.set(Resources.get() - LaserTower.BuildCost);
                 return true;
             }
             default: return false;
         }
     }
 
-    public Tower TowerAt (int postion_x, int position_y){
+    public Tower TowerAt (int position_x, int position_y){
         for (Tower tower : towers){
-            if (tower.getX_position() == postion_x)
+            if (tower.getX_position() == position_x)
                 if (tower.getY_position() == position_y)
                     return tower;
         }
@@ -108,6 +110,15 @@ public class Arena {
         }
         return null;
     }
+//    public SimpleStringProperty TowerInfo (int position_x, int position_y){
+//        SimpleStringProperty tower_info = null;
+//        for (Tower tower : towers){
+//            if (tower.getX_position() == position_x)
+//                if (tower.getY_position() == position_y)
+//                    tower_info = new SimpleStringProperty(tower.TowerToString());
+//        }
+//        return tower_info;
+//    }
 
     public boolean RemoveTower (int position_x, int position_y){
         if (TowerAt(position_x,position_y)!=null){
@@ -119,8 +130,8 @@ public class Arena {
 
     public boolean UpgradeTower (int position_x, int position_y){
         Tower tower = TowerAt(position_x, position_y);
-        if (tower.getUpgradeCost()<Resources){
-            Resources -= tower.getUpgradeCost();
+        if (tower.getUpgradeCost()<Resources.get()){
+            Resources.set(Resources.get() - tower.getUpgradeCost());
             tower.upgrade();
             return true;
         }
