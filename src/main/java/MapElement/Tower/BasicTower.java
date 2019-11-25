@@ -1,5 +1,8 @@
 package MapElement.Tower;
 
+
+import MapElement.MapElement;
+
 public class BasicTower extends Tower {
     public static final int BuildCost = 2;        // TODO need to be assigned value
     public static final int DefaultPower = 2;
@@ -12,13 +15,18 @@ public class BasicTower extends Tower {
         setY_position(y);
     }
 
-
-
     @Override
     public String TowerToString(){
         return "Basic Tower\n" +
                 super.TowerToString() +
                 getRange();
+    }
+
+    @Override
+    public boolean checkInRange(MapElement m){
+        if(getDistance(this, m) < DefaultRange)
+            return true;
+        return false;
     }
 
 }

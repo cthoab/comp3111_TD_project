@@ -10,6 +10,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Arena {
@@ -42,8 +43,12 @@ public class Arena {
 
     public void monsterMove(){
         for(Monster m : monsters) {
-            for (int i = 0; i < m.getSpeed(); i++)
-                m.move();
+            for (int i = 0; i < m.getSpeed(); i++) {
+                if(m.getHP()>0){
+                    m.move();
+                    TowerAttack();
+                }
+            }
             m.addSurvivedtime();
             m.evolve();
             if(m.getClass() == Penguin.class)
@@ -59,9 +64,11 @@ public class Arena {
     }
 
     public void removeDeadMonsters(){
-        for(Monster m : monsters){
-            if(m.getHP() <= 0)
-                monsters.remove(m);
+        Iterator<Monster> m = monsters.iterator();
+        while(m.hasNext()){
+            Monster monster = m.next();
+            if(monster.getHP()<=0)
+                m.remove();
         }
     }
 
@@ -138,6 +145,21 @@ public class Arena {
         return false;
     }
 
+    private void TowerAttack(){
+        for(Tower t : towers){
+            for(Monster m : monsters){
+                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0){
+                    t.setAttacked(true);
+                    m.setHP(m.getHP() - t.getDamage());
+                    System.out.println(t.getClass() + " Attacked " + m.getClass());
+                }
+            }
+        }
+    }
 
+    public void resetTowers(){
+        for(Tower t:towers)
+            t.setAttacked(false);
+    }
 
 }

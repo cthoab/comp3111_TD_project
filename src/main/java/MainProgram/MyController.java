@@ -140,6 +140,7 @@ public class MyController {
 
     @FXML
     private void nextFrame() {
+        arena.resetTowers();
         arena.removeDeadMonsters();
         arena.monsterMove();
         arena.spawnMonster();
