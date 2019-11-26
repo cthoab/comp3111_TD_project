@@ -148,9 +148,17 @@ public class Arena {
     private void TowerAttack(){
         for(Tower t : towers){
             for(Monster m : monsters){
-                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0){
+                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
+                int maxSteps = 0;
+                Monster closestMonster = null;
+                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
+                    inRangeMonsters.add(m);
+                for(Monster inRangeM:inRangeMonsters)
+                    if (inRangeM.getSteps() > maxSteps)
+                        closestMonster = inRangeM;
+                if(closestMonster != null){
                     t.setAttacked(true);
-                    m.setHP(m.getHP() - t.getDamage());
+                    closestMonster.setHP(closestMonster.getHP() - t.getDamage());
                     System.out.println(t.getClass() + " Attacked " + m.getClass());
                 }
             }
