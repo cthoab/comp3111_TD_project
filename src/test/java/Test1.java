@@ -36,6 +36,17 @@ public class Test1 {
 
 
     }
+    @Test
+    public void testIceTower(){
+      IceTower t = new IceTower(0,0);
+        Assert.assertEquals(t.TowerToString(),"Ice Tower\nLevel: 1\nPower: 15\nRange: 120");
 
+    }
+    @Test
+    public void testLaserTower(){
+        LaserTower t = new LaserTower(0,0);
+        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity");
+
+    }
 
 }
