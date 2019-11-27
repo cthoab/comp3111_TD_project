@@ -1,4 +1,4 @@
-package test;
+package MapElement;
 import MainProgram.*;
 import MapElement.Tower.*;
 import MapElement.Monster.*;

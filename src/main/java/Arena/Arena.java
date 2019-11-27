@@ -22,7 +22,6 @@ public class Arena {
 
 
     public Arena(){
-
     }
 
     public void spawnMonster(){
@@ -132,7 +131,7 @@ public class Arena {
             towers.remove(TowerAt(position_x,position_y));
             return true;
         }
-        return true;
+        return false;
     }
 
     public boolean UpgradeTower (int position_x, int position_y){
