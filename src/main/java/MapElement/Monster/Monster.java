@@ -7,6 +7,7 @@ public abstract class Monster extends MapElement {
     private int hp;
     private int speed;
     private int survivedtime;
+    private int stepsTaken;
     protected static int DEFAULT_HP = 5;
     protected static int DEFAULT_SPEED = 40;
 
@@ -14,6 +15,7 @@ public abstract class Monster extends MapElement {
     public void setHP(int hp){ this.hp = hp; }
     public int getSpeed(){ return speed; }
     public void setSpeed(int speed){ this.speed = speed; }
+    public int getSteps(){return stepsTaken;}
 
     public void move(){
         if(this.getX_position()>=440)
@@ -27,6 +29,7 @@ public abstract class Monster extends MapElement {
         //move right
         else
             setX_position(getX_position()+1);
+        stepsTaken++;
     };
     public void evolve(){
         if(survivedtime % 5 == 0) {

@@ -8,6 +8,7 @@ public abstract class Tower extends MapElement {
     private int damage;
     private int range;
     private int level;
+    private boolean attacked;
 
     public int getDamage() {
         return damage;
@@ -33,6 +34,10 @@ public abstract class Tower extends MapElement {
         UpgradeCost = upgradeCost;
     }
 
+    public boolean getAttacked(){ return attacked;}
+
+    public void setAttacked(boolean attacked){this.attacked = attacked;}
+
 
     public void upgrade(){
         damage = (int) (damage*1.5);
@@ -40,15 +45,13 @@ public abstract class Tower extends MapElement {
         level++;
     }
 
-
-
     protected Tower(int damage, int range, int UpgradeCost){
         this.level = 1;
         this.UpgradeCost = UpgradeCost;
         this.damage = damage;
         this.range = range;
+        attacked = false;
     }
-
 
     public String TowerToString(){
         return "Level: " +
@@ -60,4 +63,7 @@ public abstract class Tower extends MapElement {
                 "Range: ";
     }
 
+    public boolean checkInRange(MapElement m){
+        return false;
+    };
 }

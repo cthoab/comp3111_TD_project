@@ -19,4 +19,9 @@ public abstract class MapElement {
     public void setY_position(int y_position) {
         this.y_position = y_position;
     }
+
+    public static int getDistance(MapElement a, MapElement b){
+        Double d = Math.sqrt(Math.pow(a.x_position - b.x_position,2) + Math.pow(a.y_position - b.y_position,2));
+        return (int)Math.round(d);
+    }
 }
