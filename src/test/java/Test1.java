@@ -66,6 +66,68 @@ public class Test1 {
         t.upgrade();
         t.upgrade();
         t.upgrade();
+    }
+    @Test
+    public void testFox(){
+        Fox m = new Fox();
+    }
+    @Test
+    public void testPenguin(){
+        Penguin m = new Penguin();
+        m.replenish();
+        m.evolve();
+        for(int i = 0; i < 4; i++) m.addSurvivedtime();
+        m.evolve();
+        m.setHP(1);
+        m.replenish();
+        m.move();
+        m.setX_position(440);
+        m.move();
+        m.setX_position(180);
+        m.setY_position(21);
+        m.move();
+        m.setX_position(260);
+        m.move();
+
+
+        Assert.assertEquals(m.getSpeed(),50);
+    }
+    @Test
+    public void testUnicorn(){
+        Unicorn m = new Unicorn();
+    }
+    @Test
+    public void testArena(){
+        Arena a = new Arena();
+        for(int i = 0; i <30; i++) a.spawnMonster();
+        a.monsterMove();
+        for(Monster m : a.monsters)
+            m.setHP(0);
+        a.monsterMove();
+        a.removeDeadMonsters();
+        Assert.assertEquals(a.checkGameOver(),false);
+        a.spawnMonster();
+        for(Monster m : a.monsters)
+            m.setX_position(440);
+        Assert.assertEquals(a.checkGameOver(),true);
+        Assert.assertEquals(a.BuildTower('B',0,0),true);
+        Assert.assertEquals(a.BuildTower('I',1,0),true);
+        Assert.assertEquals(a.BuildTower('L',2,0),true);
+        Assert.assertEquals(a.BuildTower('C',3,0),true);
+
+        Assert.assertEquals(a.BuildTower('G',3,2),false);
+        Assert.assertEquals(a.BuildTower('B',0,0),false);
+
+        Assert.assertEquals(a.RemoveTower(0,0),true);
+        Assert.assertEquals(a.RemoveTower(0,0),true);
+        Assert.assertEquals(a.UpgradeTower(1,0),true);
+        a.resetTowers();
+        Assert.assertEquals("Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity",a.TowerInfo(2,0));
+        Assert.assertEquals(null,a.TowerInfo(0,0));
+
+
+
+
 
     }
 }
