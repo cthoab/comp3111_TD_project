@@ -49,4 +49,23 @@ public class Test1 {
 
     }
 
+    @Test
+    public void testCatapult(){
+        Catapult t = new Catapult(0,0);
+        Assert.assertEquals(t.TowerToString(),"Catapult\nLevel: 1\nPower: 2\nRange: 50 - 150");
+        Assert.assertEquals(t.ReloadTimeLeft(),0);
+        t.Reload();
+        Assert.assertEquals(t.ReloadTimeLeft(),5);
+
+        for(int i = 0; i < 5; i++){
+            t.coolDown();
+        }
+        t.coolDown();
+        Assert.assertEquals(t.ReloadTimeLeft(),0);
+        t.upgrade();
+        t.upgrade();
+        t.upgrade();
+        t.upgrade();
+
+    }
 }
