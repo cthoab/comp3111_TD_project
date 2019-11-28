@@ -45,7 +45,7 @@ public class Arena {
             for (int i = 0; i < m.getSpeed(); i++) {
                 if(m.getHP()>0){
                     m.move();
-                    TowerAttack();
+//                    TowerAttack();
                 }
             }
             m.addSurvivedtime();
@@ -144,25 +144,28 @@ public class Arena {
         return false;
     }
 
-    private void TowerAttack(){
-        for(Tower t : towers){
-            for(Monster m : monsters){
-                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
-                int maxSteps = 0;
-                Monster closestMonster = null;
-                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
-                    inRangeMonsters.add(m);
-                for(Monster inRangeM:inRangeMonsters)
-                    if (inRangeM.getSteps() > maxSteps)
-                        closestMonster = inRangeM;
-                if(closestMonster != null){
-                    t.setAttacked(true);
-                    closestMonster.setHP(closestMonster.getHP() - t.getDamage());
-                    System.out.println(t.getClass() + " Attacked " + m.getClass());
-                }
-            }
-        }
-    }
+
+
+
+//    private void TowerAttack(){
+//        for(Tower t : towers){
+//            for(Monster m : monsters){
+//                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
+//                int maxSteps = 0;
+//                Monster closestMonster = null;
+//                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
+//                    inRangeMonsters.add(m);
+//                for(Monster inRangeM:inRangeMonsters)
+//                    if (inRangeM.getSteps() > maxSteps)
+//                        closestMonster = inRangeM;
+//                if(closestMonster != null){
+//                    t.setAttacked(true);
+//                    closestMonster.setHP(closestMonster.getHP() - t.getDamage());
+//                    System.out.println(t.getClass() + " Attacked " + m.getClass());
+//                }
+//            }
+//        }
+//    }
 
     public void resetTowers(){
         for(Tower t:towers)

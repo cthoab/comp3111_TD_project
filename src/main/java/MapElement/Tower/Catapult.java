@@ -1,5 +1,7 @@
 package MapElement.Tower;
 
+import MapElement.MapElement;
+
 public class Catapult extends Tower {
     private int reloadTimeLeft;
     private int reloadTime;
@@ -39,7 +41,14 @@ public class Catapult extends Tower {
     public String TowerToString(){
         return "Catapult\n" +
                 super.TowerToString() +
-                "50 - 150";
+                "50 - 150\n" +
+                "Cool Down Time Left: " +
+                reloadTimeLeft;
+    }
+
+    @Override
+    public boolean checkInRange(MapElement m) {
+        return (getDistance(this,m) >= DefaultInnerRange && getDistance(this,m) <= DefaultOuterRange);
     }
 
 }

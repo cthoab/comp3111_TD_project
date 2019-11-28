@@ -1,5 +1,7 @@
 package MapElement.Tower;
 
+import MapElement.MapElement;
+
 public class LaserTower extends Tower {
     public static int BuildCost = 8;
     public static final int DefaultPower = 2;
@@ -20,6 +22,11 @@ public class LaserTower extends Tower {
         return "Laser Tower\n" +
                 super.TowerToString() +
                 "Infinity";
+    }
+
+    @Override
+    public boolean checkInRange(MapElement m) {
+        return true;
     }
 
 }

@@ -63,7 +63,20 @@ public abstract class Tower extends MapElement {
                 "Range: ";
     }
 
-    public boolean checkInRange(MapElement m){
-        return false;
-    };
+    public abstract boolean checkInRange(MapElement m);
+
+    public String simpleInfo() {
+        String output;
+        if (this instanceof BasicTower)
+            output = "Basic Tower ";
+        else if (this instanceof IceTower)
+            output = "Ice Tower ";
+        else if (this instanceof LaserTower)
+            output = "Laser Tower ";
+        else if (this instanceof Catapult)
+            output = "Catapult ";
+        else
+            throw new IllegalStateException("Tower of wrong type.");
+        return output + "at (" + this.getX_position() + "," + this.getY_position() + ") ";
+    }
 }

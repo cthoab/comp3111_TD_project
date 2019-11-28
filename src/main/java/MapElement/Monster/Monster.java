@@ -1,6 +1,5 @@
 package MapElement.Monster;
 
-import java.lang.Math;
 import MapElement.MapElement;
 
 public abstract class Monster extends MapElement {
@@ -48,5 +47,18 @@ public abstract class Monster extends MapElement {
         survivedtime = 0;
         setX_position(20);
         setY_position(20);
+    }
+
+    public String simpleInfo(){
+        String output;
+        if (this instanceof Fox)
+            output = "Fox ";
+        else if (this instanceof Penguin)
+            output = "Penguin ";
+        else if (this instanceof Unicorn)
+            output = "Unicorn ";
+        else
+            throw new IllegalStateException("Monster of wrong type.");
+        return output + "at (" + this.getX_position() + "," + this.getY_position() + ")";
     }
 }

@@ -1,23 +1,29 @@
 package MainProgram;
 
-import MapElement.Tower.Tower;
-import javafx.scene.control.*;
+import Arena.Arena;
+import MapElement.Monster.Fox;
+import MapElement.Monster.Monster;
+import MapElement.Monster.Penguin;
 import MapElement.Tower.Catapult;
-
+import MapElement.Tower.IceTower;
+import MapElement.Tower.LaserTower;
+import MapElement.Tower.Tower;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.event.*;
-import javafx.fxml.FXML;
-import javafx.scene.layout.*;
-import javafx.geometry.Insets;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
-
-import Arena.Arena;
-import MapElement.Monster.*;
-import javafx.scene.shape.Circle;
 
 public class MyController {
     @FXML
@@ -66,7 +72,34 @@ public class MyController {
     private int x = -1, y = 0; //where is my monster
 
     private Arena arena;
-    private ArrayList<Label> MonsterLabel = new ArrayList<Label>();
+    private ArrayList<Label> MonsterLabel = new ArrayList<>();
+
+    class Stone extends Circle{
+        int damage;
+        Stone(int center_x, int center_y, int damage){
+            this.damage = damage;
+            this.setCenterX(center_x);
+            this.setCenterY(center_y);
+            this.setRadius(25);
+            this.setFill(Color.YELLOW);
+            this.setVisible(false);
+        }
+    }
+    class Laser extends Line{
+        int damage;
+        Laser(int from_x,int from_y,int to_x,int to_y,int damage){
+            this.damage = damage;
+            this.setStartX(from_x);
+            this.setStartY(from_y);
+            this.setEndX(to_x);
+            this.setEndY(to_y);
+            this.setStrokeWidth(3);
+            this.setStroke(Color.RED);
+        }
+    }
+
+    private ArrayList<Stone> StoneCircle = new ArrayList<>();                  //when stone is thrown, transparent circle will be created and empty again after damage is calculate
+    private ArrayList<Laser> LaserLine = new ArrayList<>();                      //draw line between laser tower and the monster, then calculate damage to the monster on the line
 
     /**
      * A dummy function to show how button click works
@@ -140,9 +173,13 @@ public class MyController {
 
     @FXML
     private void nextFrame() {
+        System.out.println("\n \n ------- Next Frame -------");
+        paneArena.getChildren().removeAll(LaserLine);
+        LaserLine.clear();
         arena.resetTowers();
         arena.removeDeadMonsters();
         arena.monsterMove();
+        TowerAttack();
         arena.spawnMonster();
         drawArena(arena);
         if(arena.checkGameOver())
@@ -190,8 +227,71 @@ public class MyController {
         }
     }
 
+    private void DrawLaser(int from_x, int from_y, int to_x, int to_y, int damage){
+        Laser Laser = new Laser(from_x,from_y,to_x,to_y,damage);
+        this.LaserLine.add(Laser);
+        this.paneArena.getChildren().add(Laser);
+    }
+
+    private void throwStone(int center_x, int center_y, int damage){
+       this.StoneCircle.add(new Stone(center_x, center_y, damage));
+    }
+
+    private void TowerAttack(){
+        for(Tower t : arena.towers){
+            for(Monster m : arena.monsters){
+                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
+                int maxSteps = 0;
+                Monster closestMonster = null;
+                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
+                    inRangeMonsters.add(m);
+                for(Monster inRangeM:inRangeMonsters)
+                    if (inRangeM.getSteps() > maxSteps)
+                        closestMonster = inRangeM;
+                if(closestMonster != null){
+                    t.setAttacked(true);
+                    int OriginalHP = closestMonster.getHP();
+                    if(t instanceof IceTower) {
+                        closestMonster.setSpeed(closestMonster.getSpeed() - t.getDamage());
+                        System.out.println(t.simpleInfo() + " freeze " + m.simpleInfo());;
+                        System.out.println(m.simpleInfo() + " is " + t.getDamage() + " Slower.");
+                    } else if (t instanceof LaserTower) {
+                        DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                        System.out.println(t.simpleInfo() + " attacked " + m.simpleInfo());
+                    } else {
+                        if (t instanceof Catapult) {
+                            if (((Catapult) t).ReloadTimeLeft() == 0) {
+                            throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                            ((Catapult) t).Reload();
+                            }else continue;
+                        }
+                        closestMonster.setHP(closestMonster.getHP() - t.getDamage());
+                        System.out.println(t.simpleInfo() + " attacked " + m.simpleInfo());
+                        System.out.println("HP of " +  m.simpleInfo() + " dropped from " + OriginalHP + " to " + m.getHP());
+                    }
+                }
+            }
+            if (t instanceof Catapult)
+                ((Catapult) t).coolDown();
+        }
+        System.out.println("\n------- Range Attack -------");
+        for (Monster monster: arena.monsters) {
+            for (Laser laser: LaserLine)
+                if (laser.contains(monster.getX_position(), monster.getY_position())) {
+                    monster.setHP(monster.getHP() - laser.damage);
+                    System.out.println(monster.simpleInfo() + "is hit by the laser and cause " + laser.damage + " HP damage!");
+                }
+            for (Stone stone: StoneCircle)
+                if (stone.contains(monster.getX_position(), monster.getY_position())) {
+                    monster.setHP(monster.getHP() - stone.damage);
+                    System.out.println(monster.simpleInfo() + "is hit by the stone cause " + stone.damage + " HP damage!");
+                }
+        }
+        StoneCircle.clear();
+    }
+
     public void gameOver(){
-        System.out.println("Gameover");
+        System.out.println("Game Over");
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!");
         for(Label[] Grids : grids)
             for(Label grid : Grids){

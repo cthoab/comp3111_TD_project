@@ -1,5 +1,7 @@
 package MapElement.Tower;
 
+import MapElement.MapElement;
+
 public class IceTower extends Tower {
     public static final int BuildCost = 4;
     public static final int DefaultRange = 120;
@@ -21,6 +23,13 @@ public class IceTower extends Tower {
         return "Ice Tower\n" +
                 super.TowerToString() +
                 getRange();
+    }
+
+    @Override
+    public boolean checkInRange(MapElement m) {
+        if(getDistance(this, m) < DefaultRange)
+            return true;
+        return false;
     }
 
 
