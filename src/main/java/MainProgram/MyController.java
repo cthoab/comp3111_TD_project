@@ -97,9 +97,34 @@ public class MyController {
             this.setStroke(Color.RED);
         }
     }
+    public static class Ice extends Circle{
+        int damage;
+        Ice(int center_x, int center_y, int damage){
+            this.damage = damage;
+            this.setCenterX(center_x);
+            this.setCenterY(center_y);
+            this.setRadius(5);
+            this.setFill(Color.BLUE);
+            this.setVisible(true);
+        }
+    }
+    public static class Attack extends Circle{
+        int damage;
+        Attack(int center_x, int center_y, int damage){
+            this.damage = damage;
+            this.setCenterX(center_x);
+            this.setCenterY(center_y);
+            this.setRadius(5);
+            this.setFill(Color.RED);
+            this.setVisible(true);
+        }
+    }
+
 
     public static ArrayList<Stone> StoneCircle = new ArrayList<>();                  //when stone is thrown, transparent circle will be created and empty again after damage is calculate
     public static ArrayList<Laser> LaserLine = new ArrayList<>();                      //draw line between laser tower and the monster, then calculate damage to the monster on the line
+    public static ArrayList<Ice> IceBall = new ArrayList<>();
+    public static ArrayList<Attack> AttackFX = new ArrayList<>();
 
     /**
      * A dummy function to show how button click works
@@ -115,6 +140,7 @@ public class MyController {
     /**
      * A function that create the Arena
      */
+
     @FXML
     public void createArena() {
         arena = new Arena();
@@ -176,6 +202,10 @@ public class MyController {
         System.out.println("\n \n ------- Next Frame -------");
         paneArena.getChildren().removeAll(LaserLine);
         LaserLine.clear();
+        paneArena.getChildren().removeAll(IceBall);
+        IceBall.clear();
+        paneArena.getChildren().removeAll(AttackFX);
+        AttackFX.clear();
         arena.resetTowers();
         arena.removeDeadMonsters();
         arena.monsterMove();
@@ -226,13 +256,24 @@ public class MyController {
         }
         paneArena.getChildren().addAll(LaserLine);
         paneArena.getChildren().addAll(StoneCircle);
+        paneArena.getChildren().addAll(AttackFX);
+        paneArena.getChildren().addAll(IceBall);
+
+
     }
 
     public static void DrawLaser(int from_x, int from_y, int to_x, int to_y, int damage){
         Laser Laser = new Laser(from_x,from_y,to_x,to_y,damage);
         LaserLine.add(Laser);
     }
-
+    public static void DrawIceAttack(int center_x, int center_y, int damage){
+        Ice ice = new Ice(center_x,center_y,damage);
+        IceBall.add(ice);
+    }
+    public static void DrawAttack(int center_x, int center_y, int damage){
+        Attack attack = new Attack( center_x, center_y,  damage);
+        AttackFX.add(attack);
+    }
     public static void throwStone(int center_x, int center_y, int damage){
         StoneCircle.add(new Stone(center_x, center_y, damage));
     }

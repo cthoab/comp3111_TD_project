@@ -165,6 +165,7 @@ public class Arena {
                     t.setAttacked(true);
                     int OriginalHP = closestMonster.getHP();
                     if(t instanceof IceTower) {
+                        MyController.DrawIceAttack(closestMonster.getX_position(),closestMonster.getY_position(),t.getDamage());
                         closestMonster.setSpeed(closestMonster.getSpeed() - t.getDamage());
                         System.out.println(t.simpleInfo() + " freeze " + closestMonster.simpleInfo());;
                         System.out.println(closestMonster.simpleInfo() + " is " + t.getDamage() + " Slower.");
@@ -172,7 +173,13 @@ public class Arena {
                         MyController.DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
                         MyController.aoeDamage(this);
-                    } else {
+                    }
+                    else if(t instanceof BasicTower){
+                        MyController.DrawAttack(closestMonster.getX_position(),closestMonster.getY_position(),t.getDamage());
+                        System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
+
+                    }
+                    else {
                         if (t instanceof Catapult) {
                             if (((Catapult) t).ReloadTimeLeft() == 0) {
                                 MyController.throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
