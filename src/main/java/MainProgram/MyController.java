@@ -74,7 +74,7 @@ public class MyController {
     private Arena arena;
     private ArrayList<Label> MonsterLabel = new ArrayList<>();
 
-    class Stone extends Circle{
+    public static class Stone extends Circle{
         int damage;
         Stone(int center_x, int center_y, int damage){
             this.damage = damage;
@@ -82,10 +82,10 @@ public class MyController {
             this.setCenterY(center_y);
             this.setRadius(25);
             this.setFill(Color.YELLOW);
-            this.setVisible(false);
+            this.setVisible(true);
         }
     }
-    class Laser extends Line{
+    public static class Laser extends Line{
         int damage;
         Laser(int from_x,int from_y,int to_x,int to_y,int damage){
             this.damage = damage;
@@ -98,8 +98,8 @@ public class MyController {
         }
     }
 
-    private ArrayList<Stone> StoneCircle = new ArrayList<>();                  //when stone is thrown, transparent circle will be created and empty again after damage is calculate
-    private ArrayList<Laser> LaserLine = new ArrayList<>();                      //draw line between laser tower and the monster, then calculate damage to the monster on the line
+    public static ArrayList<Stone> StoneCircle = new ArrayList<>();                  //when stone is thrown, transparent circle will be created and empty again after damage is calculate
+    public static ArrayList<Laser> LaserLine = new ArrayList<>();                      //draw line between laser tower and the monster, then calculate damage to the monster on the line
 
     /**
      * A dummy function to show how button click works
@@ -179,7 +179,6 @@ public class MyController {
         arena.resetTowers();
         arena.removeDeadMonsters();
         arena.monsterMove();
-        TowerAttack();
         arena.spawnMonster();
         drawArena(arena);
         if(arena.checkGameOver())
@@ -201,7 +200,7 @@ public class MyController {
             newLabel.setStyle("-fx-border-color: none;");
             Label info = new Label();
             newLabel.setOnMouseEntered(e->{
-                info.setText("HP: " + Integer.toString(m.getHP()));
+                info.setText("HP: " + m.getHP() +"/" + m.getMaxHP());
                 info.setLayoutX(m.getX_position()+10);
                 info.setLayoutY(m.getY_position()-10);
                 info.setStyle("-fx-background-color: yellow; -fx-font: 20 arial");
@@ -225,55 +224,20 @@ public class MyController {
             MonsterLabel.add(newLabel);
             paneArena.getChildren().addAll(newLabel);
         }
+        paneArena.getChildren().addAll(LaserLine);
+        paneArena.getChildren().addAll(StoneCircle);
     }
 
-    private void DrawLaser(int from_x, int from_y, int to_x, int to_y, int damage){
+    public static void DrawLaser(int from_x, int from_y, int to_x, int to_y, int damage){
         Laser Laser = new Laser(from_x,from_y,to_x,to_y,damage);
-        this.LaserLine.add(Laser);
-        this.paneArena.getChildren().add(Laser);
+        LaserLine.add(Laser);
     }
 
-    private void throwStone(int center_x, int center_y, int damage){
-       this.StoneCircle.add(new Stone(center_x, center_y, damage));
+    public static void throwStone(int center_x, int center_y, int damage){
+        StoneCircle.add(new Stone(center_x, center_y, damage));
     }
 
-    private void TowerAttack(){
-        for(Tower t : arena.towers){
-            for(Monster m : arena.monsters){
-                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
-                int maxSteps = 0;
-                Monster closestMonster = null;
-                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
-                    inRangeMonsters.add(m);
-                for(Monster inRangeM:inRangeMonsters)
-                    if (inRangeM.getSteps() > maxSteps)
-                        closestMonster = inRangeM;
-                if(closestMonster != null){
-                    t.setAttacked(true);
-                    int OriginalHP = closestMonster.getHP();
-                    if(t instanceof IceTower) {
-                        closestMonster.setSpeed(closestMonster.getSpeed() - t.getDamage());
-                        System.out.println(t.simpleInfo() + " freeze " + m.simpleInfo());;
-                        System.out.println(m.simpleInfo() + " is " + t.getDamage() + " Slower.");
-                    } else if (t instanceof LaserTower) {
-                        DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
-                        System.out.println(t.simpleInfo() + " attacked " + m.simpleInfo());
-                    } else {
-                        if (t instanceof Catapult) {
-                            if (((Catapult) t).ReloadTimeLeft() == 0) {
-                            throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
-                            ((Catapult) t).Reload();
-                            }else continue;
-                        }
-                        closestMonster.setHP(closestMonster.getHP() - t.getDamage());
-                        System.out.println(t.simpleInfo() + " attacked " + m.simpleInfo());
-                        System.out.println("HP of " +  m.simpleInfo() + " dropped from " + OriginalHP + " to " + m.getHP());
-                    }
-                }
-            }
-            if (t instanceof Catapult)
-                ((Catapult) t).coolDown();
-        }
+    public static void aoeDamage(Arena arena){
         System.out.println("\n------- Range Attack -------");
         for (Monster monster: arena.monsters) {
             for (Laser laser: LaserLine)
@@ -337,7 +301,7 @@ public class MyController {
         target.setOnDragOver(new EventHandler <DragEvent>() {
             public void handle(DragEvent event) {
                 /* data is dragged over the target */
-                System.out.println("onDragOver");
+                //System.out.println("onDragOver");
 
                 /* accept it only if it is  not dragged from the same node
                  * and if it has a string data */
@@ -353,7 +317,7 @@ public class MyController {
         target.setOnDragEntered(new EventHandler <DragEvent>() {
             public void handle(DragEvent event) {
                 /* the drag-and-drop gesture entered the target */
-                System.out.println("onDragEntered");
+                //System.out.println("onDragEntered");
                 /* show to the user that it is an actual gesture target */
                 if (event.getGestureSource() != target &&
                         event.getDragboard().hasString()) {
@@ -367,7 +331,7 @@ public class MyController {
         target.setOnDragExited((event) -> {
             /* mouse moved away, remove the graphical cues */
             target.setStyle("-fx-border-color: black;");
-            System.out.println("Exit");
+            //System.out.println("Exit");
             event.consume();
         });
     }

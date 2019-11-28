@@ -1,6 +1,7 @@
 package Arena;
 
 
+import MainProgram.MyController;
 import MapElement.Monster.Fox;
 import MapElement.Monster.Monster;
 import MapElement.Monster.Penguin;
@@ -45,7 +46,7 @@ public class Arena {
             for (int i = 0; i < m.getSpeed(); i++) {
                 if(m.getHP()>0){
                     m.move();
-//                    TowerAttack();
+                    TowerAttack();
                 }
             }
             m.addSurvivedtime();
@@ -145,27 +146,49 @@ public class Arena {
     }
 
 
-
-
-//    private void TowerAttack(){
-//        for(Tower t : towers){
-//            for(Monster m : monsters){
-//                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
-//                int maxSteps = 0;
-//                Monster closestMonster = null;
-//                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
-//                    inRangeMonsters.add(m);
-//                for(Monster inRangeM:inRangeMonsters)
-//                    if (inRangeM.getSteps() > maxSteps)
-//                        closestMonster = inRangeM;
-//                if(closestMonster != null){
-//                    t.setAttacked(true);
-//                    closestMonster.setHP(closestMonster.getHP() - t.getDamage());
-//                    System.out.println(t.getClass() + " Attacked " + m.getClass());
-//                }
-//            }
-//        }
-//    }
+    private void TowerAttack(){
+        for(Tower t : towers){
+            Monster closestMonster = null;
+            int maxSteps = 0;
+            for(Monster m : monsters){
+                ArrayList<Monster> inRangeMonsters = new ArrayList<>();
+                if(t.checkInRange(m) && !t.getAttacked() && m.getHP()>0)
+                    inRangeMonsters.add(m);
+                for(Monster inRangeM:inRangeMonsters) {
+                    if (inRangeM.getSteps() > maxSteps) {
+                        closestMonster = inRangeM;
+                        maxSteps = inRangeM.getSteps();
+                    }
+                }
+            }
+            if(closestMonster != null){
+                    t.setAttacked(true);
+                    int OriginalHP = closestMonster.getHP();
+                    if(t instanceof IceTower) {
+                        closestMonster.setSpeed(closestMonster.getSpeed() - t.getDamage());
+                        System.out.println(t.simpleInfo() + " freeze " + closestMonster.simpleInfo());;
+                        System.out.println(closestMonster.simpleInfo() + " is " + t.getDamage() + " Slower.");
+                    } else if (t instanceof LaserTower) {
+                        MyController.DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                        System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
+                        MyController.aoeDamage(this);
+                    } else {
+                        if (t instanceof Catapult) {
+                            if (((Catapult) t).ReloadTimeLeft() == 0) {
+                                MyController.throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                                ((Catapult) t).Reload();
+                                MyController.aoeDamage(this);
+                            }
+                        }
+                        closestMonster.setHP(closestMonster.getHP() - t.getDamage());
+                        System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
+                        System.out.println("HP of " +  closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
+                    }
+                    if (t instanceof Catapult)
+                        ((Catapult) t).coolDown();
+                }
+        }
+    }
 
     public void resetTowers(){
         for(Tower t:towers)

@@ -7,6 +7,7 @@ public abstract class Monster extends MapElement {
     private int speed;
     private int survivedtime;
     private int stepsTaken;
+    protected int evolvedTimes;
     protected static int DEFAULT_HP = 5;
     protected static int DEFAULT_SPEED = 40;
 
@@ -29,13 +30,15 @@ public abstract class Monster extends MapElement {
         else
             setX_position(getX_position()+1);
         stepsTaken++;
-    };
+    }
+
     public void evolve(){
         if(survivedtime % 5 == 0) {
             hp += 2;
             speed += 10;
+            evolvedTimes++;
         }
-    };
+    }
 
     public void addSurvivedtime(){
         survivedtime++;
@@ -45,6 +48,8 @@ public abstract class Monster extends MapElement {
         this.hp = DEFAULT_HP;
         this.speed = DEFAULT_SPEED;
         survivedtime = 0;
+        stepsTaken = 0;
+        evolvedTimes = 0;
         setX_position(20);
         setY_position(20);
     }
@@ -60,5 +65,9 @@ public abstract class Monster extends MapElement {
         else
             throw new IllegalStateException("Monster of wrong type.");
         return output + "at (" + this.getX_position() + "," + this.getY_position() + ")";
+    }
+
+    public int getMaxHP(){
+        return DEFAULT_HP + evolvedTimes*2;
     }
 }
