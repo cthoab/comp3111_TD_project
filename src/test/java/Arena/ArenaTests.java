@@ -73,6 +73,16 @@ public class ArenaTests {
 
         a.BuildTower('L', 140,60);
         System.out.println(a.Resources.get());
+        for(int i=0; i<10; i++){
+            a.spawnMonster();
+            a.monsterMove();
+        }
+        a.resetTowers();
+        a.Resources.set(0);
+        a.BuildTower('B', 20,60);
+        a.BuildTower('I', 60,60);
+        a.BuildTower('C', 100,60);
+        a.BuildTower('C', 1000,60);
 
 
         for(int i=0; i<10; i++){
