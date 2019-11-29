@@ -14,10 +14,10 @@ public class Test1 {
     Assert.assertEquals(t.getX_position(),0);
     Assert.assertEquals(t.getY_position(),0);
     Assert.assertEquals(t.getLevel(),1);
-    Assert.assertEquals(t.getDamage(),2);
+    Assert.assertEquals(t.getDamage(),4);
     Assert.assertEquals(t.getUpgradeCost(),2);
 
-        Assert.assertEquals(t.TowerToString(),"Basic Tower\nLevel: 1\nPower: 2\nRange: 65");
+        Assert.assertEquals(t.TowerToString(),"Basic Tower\nLevel: 1\nPower: 4\nRange: 65");
     t.setAttacked(true);
     MapElement m = new BasicTower(1,1);
     int range = t.getDistance(t,m);
@@ -45,14 +45,14 @@ public class Test1 {
     @Test
     public void testLaserTower(){
         LaserTower t = new LaserTower(0,0);
-        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity");
+        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 10\nRange: Infinity");
 
     }
 
     @Test
     public void testCatapult(){
         Catapult t = new Catapult(0,0);
-        Assert.assertEquals(t.TowerToString(),"Catapult\nLevel: 1\nPower: 2\nRange: 50 - 150");
+        Assert.assertEquals(t.TowerToString(),"Catapult\nLevel: 1\nPower: 6\nRange: 50 - 150\nCool Down Time Left: 0");
         Assert.assertEquals(t.ReloadTimeLeft(),0);
         t.Reload();
         Assert.assertEquals(t.ReloadTimeLeft(),5);
@@ -119,10 +119,10 @@ public class Test1 {
         Assert.assertEquals(a.BuildTower('B',0,0),false);
 
         Assert.assertEquals(a.RemoveTower(0,0),true);
-        Assert.assertEquals(a.RemoveTower(0,0),true);
+        Assert.assertEquals(a.RemoveTower(0,0),false);
         Assert.assertEquals(a.UpgradeTower(1,0),true);
         a.resetTowers();
-        Assert.assertEquals("Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity",a.TowerInfo(2,0));
+        Assert.assertEquals("Laser Tower\nLevel: 1\nPower: 10\nRange: Infinity",a.TowerInfo(2,0));
         Assert.assertEquals(null,a.TowerInfo(0,0));
 
 

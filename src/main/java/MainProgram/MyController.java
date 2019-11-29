@@ -5,8 +5,6 @@ import MapElement.Monster.Fox;
 import MapElement.Monster.Monster;
 import MapElement.Monster.Penguin;
 import MapElement.Tower.Catapult;
-import MapElement.Tower.IceTower;
-import MapElement.Tower.LaserTower;
 import MapElement.Tower.Tower;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -72,7 +70,7 @@ public class MyController {
     private int x = -1, y = 0; //where is my monster
 
     private Arena arena;
-    private ArrayList<Label> MonsterLabel = new ArrayList<>();
+    ArrayList<Label> MonsterLabel = new ArrayList<>();
 
     public static class Stone extends Circle{
         int damage;
@@ -130,7 +128,7 @@ public class MyController {
      * A dummy function to show how button click works
      */
     @FXML
-    private void play() {
+    void play() {
         System.out.println("Play button clicked");
         arena.spawnMonster();
         drawArena(arena);
@@ -198,7 +196,7 @@ public class MyController {
     }
 
     @FXML
-    private void nextFrame() {
+    void nextFrame() {
         System.out.println("\n \n ------- Next Frame -------");
         paneArena.getChildren().removeAll(LaserLine);
         LaserLine.clear();
@@ -279,7 +277,7 @@ public class MyController {
     }
 
     public static void aoeDamage(Arena arena){
-        System.out.println("\n------- Range Attack -------");
+        System.out.println("\n------- AOE Attack -------");
         for (Monster monster: arena.monsters) {
             for (Laser laser: LaserLine)
                 if (laser.contains(monster.getX_position(), monster.getY_position())) {
@@ -575,8 +573,8 @@ class MouseEnterShowInfoHandler implements EventHandler<MouseEvent>{
     @Override
     public void handle(MouseEvent event) {
         infoLabel.setText(tower.TowerToString());
-        infoLabel.setLayoutX(thisLabel.getLayoutX()+40);
-        infoLabel.setLayoutY(thisLabel.getLayoutY());
+        infoLabel.setLayoutX(thisLabel.getLayoutX()>400? thisLabel.getLayoutX()-80 : thisLabel.getLayoutX()+40);
+        infoLabel.setLayoutY(thisLabel.getLayoutY()>=440? thisLabel.getLayoutY()-40 : thisLabel.getLayoutY());
         infoLabel.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
         DrawCircle(circle_outer,thisLabel.getLayoutX()+MyController.GRID_WIDTH/2,
                 thisLabel.getLayoutY()+MyController.GRID_HEIGHT/2,range,range<1500);

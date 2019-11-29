@@ -6,7 +6,7 @@ public class Catapult extends Tower {
     private int reloadTimeLeft;
     private int reloadTime;
     public static final int BuildCost = 4;
-    public static final int DefaultPower = 2;
+    public static final int DefaultPower = 6;
     public static final int DefaultInnerRange = 50;
     public static final int DefaultOuterRange = 150;
     public static final int DefaultReloadTime = 5;

@@ -4,7 +4,7 @@ import MapElement.MapElement;
 
 public class LaserTower extends Tower {
     public static int BuildCost = 8;
-    public static final int DefaultPower = 2;
+    public static final int DefaultPower = 10;
     public static final int DefaultAttackCost = 1;
 
     public int attackCost;
@@ -15,6 +15,12 @@ public class LaserTower extends Tower {
         attackCost = DefaultAttackCost;
         setX_position(x);
         setY_position(y);
+    }
+
+    @Override
+    public void upgrade() {
+        super.upgrade();
+        attackCost++;
     }
 
     @Override
