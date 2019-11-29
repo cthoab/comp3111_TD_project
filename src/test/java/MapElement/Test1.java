@@ -106,6 +106,7 @@ public class Test1 {
         Unicorn m = new Unicorn();
         Assert.assertEquals(m.simpleInfo(),"Unicorn at (20,20)");
     }
+
     /*
     @Test
     public void testArena(){
