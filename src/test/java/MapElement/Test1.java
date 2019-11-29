@@ -48,14 +48,14 @@ public class Test1 {
     public void testLaserTower(){
         LaserTower t = new LaserTower(0,0);
 
-        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity");
+        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 10\nRange: Infinity");
         Assert.assertEquals(t.simpleInfo(),"Laser Tower at (0,0) ");
     }
 
     @Test
     public void testCatapult(){
         Catapult t = new Catapult(0,0);
-        Assert.assertEquals(t.TowerToString(),"Catapult\nLevel: 1\nPower: 2\nRange: 50 - 150\nCool Down Time Left: 0");
+        Assert.assertEquals(t.TowerToString(),"Catapult\nLevel: 1\nPower: 6\nRange: 50 - 150\nCool Down Time Left: 0");
         Assert.assertEquals(t.ReloadTimeLeft(),0);
         t.Reload();
         Assert.assertEquals(t.ReloadTimeLeft(),5);
@@ -140,5 +140,5 @@ public class Test1 {
 
 
 
-    }
+    }*/
 }

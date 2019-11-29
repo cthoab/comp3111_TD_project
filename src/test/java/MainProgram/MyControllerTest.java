@@ -1,3 +1,4 @@
+/*
 package MainProgram;
 
 import javafx.application.Application;
@@ -26,6 +27,7 @@ public class MyControllerTest extends Application{
         Assert.assertEquals(myController.MonsterLabel.size(), 21);
     }
 }
+*/
 
 
 
