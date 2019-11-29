@@ -3,6 +3,7 @@ package Arena;
 import MapElement.Monster.Monster;
 import MapElement.Tower.BasicTower;
 import MapElement.Tower.Tower;
+import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +60,7 @@ public class ArenaTests {
     @Test
     public void testTowerAttack(){
         a = new Arena();
+        a.Resources = new SimpleIntegerProperty(100);
         a.BuildTower('B', 20,60);
         a.BuildTower('I', 60,60);
         a.BuildTower('C', 100,60);

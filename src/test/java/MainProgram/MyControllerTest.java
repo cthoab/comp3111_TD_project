@@ -94,4 +94,17 @@ public class MyControllerTest extends ApplicationTest {
 			}
 		}
 	}
+
+	@Test
+	public void testDrag(){
+		AnchorPane b = (AnchorPane)s.lookup("#paneArena");
+		javafx.scene.Node j = null;
+		for (javafx.scene.Node i : b.getChildren()) {
+			if (i.getClass().getName().equals("javafx.scene.control.Label")) {
+				if(i.getLayoutY()==40 && i.getLayoutY()==40)
+					j = i;
+			}
+		}
+		drag("#labelBasicTower").dropTo(j);
+	}
 }

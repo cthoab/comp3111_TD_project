@@ -48,7 +48,7 @@ public class Test1 {
     public void testLaserTower(){
         LaserTower t = new LaserTower(0,0);
 
-        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 10\nRange: Infinity");
+        Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 5\nRange: Infinity");
         Assert.assertEquals(t.simpleInfo(),"Laser Tower at (0,0) ");
     }
 
