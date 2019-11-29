@@ -16,6 +16,7 @@ public class ArenaTests {
         a = new Arena();
         for(int i=0; i<10; i++)
             a.spawnMonster();
+        System.out.println(a.monsters.size());
         Assert.assertEquals(a.monsters.size(),10);
 
         for(int i=0; i<100; i++)
@@ -30,13 +31,14 @@ public class ArenaTests {
 
     @Test
     public void testTower(){
-        a = new Arena();
+        a = new Arena(100);
         a.BuildTower('B',1,0);
         a.BuildTower('C',1,1);
         a.BuildTower('I',1,2);
         a.BuildTower('L',1,3);
         a.BuildTower('D',1,4);
         a.BuildTower('L',1,0);
+        System.out.println(a.towers);
         Assert.assertEquals(a.towers.size(),4);
 
         BasicTower b = new BasicTower(1,0);

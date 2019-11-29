@@ -5,7 +5,7 @@ import MapElement.MapElement;
 
 public class BasicTower extends Tower {
     public static final int BuildCost = 2;        // TODO need to be assigned value
-    public static final int DefaultPower = 2;
+    public static final int DefaultPower = 4;
     public static final int DefaultRange = 65;
 
 

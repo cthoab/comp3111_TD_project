@@ -15,10 +15,10 @@ public class Test1 {
     Assert.assertEquals(t.getX_position(),0);
     Assert.assertEquals(t.getY_position(),0);
     Assert.assertEquals(t.getLevel(),1);
-    Assert.assertEquals(t.getDamage(),2);
+    Assert.assertEquals(t.getDamage(),4);
     Assert.assertEquals(t.getUpgradeCost(),2);
 
-        Assert.assertEquals(t.TowerToString(),"Basic Tower\nLevel: 1\nPower: 2\nRange: 65");
+        Assert.assertEquals(t.TowerToString(),"Basic Tower\nLevel: 1\nPower: 4\nRange: 65");
     t.setAttacked(true);
     MapElement m = new BasicTower(1,1);
     int range = t.getDistance(t,m);
@@ -47,6 +47,7 @@ public class Test1 {
     @Test
     public void testLaserTower(){
         LaserTower t = new LaserTower(0,0);
+
         Assert.assertEquals(t.TowerToString(),"Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity");
         Assert.assertEquals(t.simpleInfo(),"Laser Tower at (0,0) ");
     }
@@ -135,6 +136,9 @@ public class Test1 {
         Assert.assertEquals("Laser Tower\nLevel: 1\nPower: 2\nRange: Infinity",a.TowerInfo(2,0));
         Assert.assertEquals(null,a.TowerInfo(0,0));
 
-    }*/
 
+
+
+
+    }
 }

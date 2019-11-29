@@ -16,17 +16,20 @@ import java.util.Random;
 
 public class Arena {
 
-    public static final int DefaultResources = 500;
+    public static final int DefaultResources = 10;
     public SimpleIntegerProperty Resources = new SimpleIntegerProperty(DefaultResources);
     public ArrayList<Monster> monsters = new ArrayList<>();
     public ArrayList<Tower> towers = new ArrayList<>();
+    private int evolveCount = 0;
 
 
-    public Arena(){
-    }
+    public Arena(){}
+
+    public Arena(int Resources){this.Resources.set(Resources);}
 
     public void spawnMonster(){
         Random rand = new Random();
+        evolveCount ++;
         int n = rand.nextInt(3);
         switch(n){
             case 0:
@@ -37,6 +40,11 @@ public class Arena {
                 break;
             case 2:
                 monsters.add(new Unicorn());
+                break;
+                }
+        System.out.println("EvolveCount = " + evolveCount);
+        for (int i = 0; i < evolveCount/10 ; i++) {
+            monsters.get(monsters.size()-1).evolve();
         }
 
     }
@@ -67,8 +75,10 @@ public class Arena {
         Iterator<Monster> m = monsters.iterator();
         while(m.hasNext()){
             Monster monster = m.next();
-            if(monster.getHP()<=0)
+            if(monster.getHP()<=0) {
+                Resources.set(Resources.get() + monster.getMaxHP()/15 + 1);
                 m.remove();
+            }
         }
     }
 
@@ -76,22 +86,22 @@ public class Arena {
         if(TowerAt(position_x,position_y)!=null)            //A tower exist in the given position
             return false;
         switch (T){
-            case 'B' : if (Resources.get()>BasicTower.BuildCost){
+            case 'B' : if (Resources.get()>=BasicTower.BuildCost){
                 towers.add(new BasicTower(position_x,position_y));
                 Resources.set(Resources.get() - BasicTower.BuildCost);
                 return true;
             }
-            case 'C' : if (Resources.get()>Catapult.BuildCost){
+            case 'C' : if (Resources.get()>=Catapult.BuildCost){
                 towers.add(new Catapult(position_x,position_y));
                 Resources.set(Resources.get() - Catapult.BuildCost);
                 return true;
             }
-            case 'I' : if (Resources.get()> IceTower.BuildCost){
+            case 'I' : if (Resources.get()>=IceTower.BuildCost){
                 towers.add(new IceTower(position_x,position_y));
                 Resources.set(Resources.get() - IceTower.BuildCost);
                 return true;
             }
-            case 'L' : if (Resources.get()> LaserTower.BuildCost){
+            case 'L' : if (Resources.get()>=LaserTower.BuildCost){
                 towers.add(new LaserTower(position_x,position_y));
                 Resources.set(Resources.get() - LaserTower.BuildCost);
                 return true;
@@ -169,13 +179,15 @@ public class Arena {
                         closestMonster.setSpeed(closestMonster.getSpeed() - t.getDamage());
                         System.out.println(t.simpleInfo() + " freeze " + closestMonster.simpleInfo());;
                         System.out.println(closestMonster.simpleInfo() + " is " + t.getDamage() + " Slower.");
-                    } else if (t instanceof LaserTower) {
+                    } else if (t instanceof LaserTower && Resources.get() >= ((LaserTower) t).attackCost) {
                         MyController.DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
                         MyController.aoeDamage(this, true);
+                        Resources.set(Resources.get() - ((LaserTower) t).attackCost);
                     }
                     else if(t instanceof BasicTower){
                         MyController.DrawAttack(closestMonster.getX_position(),closestMonster.getY_position(),t.getDamage());
+                        closestMonster.setHP(closestMonster.getHP() - t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
                         System.out.println("HP of " +  closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
                     }
@@ -184,7 +196,7 @@ public class Arena {
                             MyController.throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
                             ((Catapult) t).Reload();
                             System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
-                            System.out.println("HP of " +  closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
+                            System.out.println("HP of " + closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
                             MyController.aoeDamage(this, false);
                         }
                         ((Catapult) t).coolDown();
