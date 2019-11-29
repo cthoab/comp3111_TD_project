@@ -180,10 +180,12 @@ public class Arena {
                         System.out.println(t.simpleInfo() + " freeze " + closestMonster.simpleInfo());;
                         System.out.println(closestMonster.simpleInfo() + " is " + t.getDamage() + " Slower.");
                     } else if (t instanceof LaserTower && Resources.get() >= ((LaserTower) t).attackCost) {
-                        MyController.DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                        int diffx = t.getX_position() - closestMonster.getX_position();
+                        int diffy = t.getY_position() - closestMonster.getY_position();
+                        MyController.DrawLaser(t.getX_position(), t.getY_position(), t.getX_position()- diffx*1000, t.getY_position() - diffy*1000, t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
                         MyController.aoeDamage(this, true);
-                        Resources.set(Resources.get() - ((LaserTower) t).attackCost);
+                        //Resources.set(Resources.get() - ((LaserTower) t).attackCost);
                     }
                     else if(t instanceof BasicTower){
                         MyController.DrawAttack(closestMonster.getX_position(),closestMonster.getY_position(),t.getDamage());
