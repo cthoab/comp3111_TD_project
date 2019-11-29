@@ -1,8 +1,6 @@
 package MapElement.Tower;
 
-import Arena.Resources;
 import MapElement.MapElement;
-import MapElement.Monster.Monster;
 
 
 public abstract class Tower extends MapElement {
@@ -10,6 +8,7 @@ public abstract class Tower extends MapElement {
     private int damage;
     private int range;
     private int level;
+    private boolean attacked;
 
     public int getDamage() {
         return damage;
@@ -35,25 +34,36 @@ public abstract class Tower extends MapElement {
         UpgradeCost = upgradeCost;
     }
 
+    public boolean getAttacked(){ return attacked;}
 
-    //To be overridden
-    protected boolean upgrade(Resources resources){
-        if (resources.getResources()<UpgradeCost)
-            return false;
+    public void setAttacked(boolean attacked){this.attacked = attacked;}
+
+
+    public void upgrade(){
+        damage = (int) (damage*1.5);
+        UpgradeCost = (int) (UpgradeCost*1.5);
         level++;
-        return true;
-    }
-
-    protected Tower(int damage, int range, int level, int UpgradeCost){
-        this.level = level;
-        this.UpgradeCost = UpgradeCost;
-        this.damage = damage;
-        this.range = range;
     }
 
     protected Tower(int damage, int range, int UpgradeCost){
-        this(damage,range,0,UpgradeCost);
+        this.level = 1;
+        this.UpgradeCost = UpgradeCost;
+        this.damage = damage;
+        this.range = range;
+        attacked = false;
     }
 
+    public String TowerToString(){
+        return "Level: " +
+                level +
+                '\n' +
+                "Power: " +
+                damage +
+                '\n' +
+                "Range: ";
+    }
 
+    public boolean checkInRange(MapElement m){
+        return false;
+    };
 }

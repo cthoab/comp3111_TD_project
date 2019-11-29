@@ -1,17 +1,14 @@
 package MapElement.Tower;
 
-import Arena.Resources;
-
 public class Catapult extends Tower {
     private int reloadTimeLeft;
     private int reloadTime;
-    public static int BuildCost;
-    public static Catapult BuildCatapult(int damage, int range, Resources resources){
-        if (resources.getResources() >= BuildCost)
-            return new Catapult(damage,range,BuildCost);
-        // We use BuildCost as the first UpgradeCost
-        return null;
-    }
+    public static final int BuildCost = 4;
+    public static final int DefaultPower = 2;
+    public static final int DefaultInnerRange = 50;
+    public static final int DefaultOuterRange = 150;
+    public static final int DefaultReloadTime = 5;
+
 
     public int ReloadTimeLeft() {
         return reloadTimeLeft;
@@ -27,18 +24,22 @@ public class Catapult extends Tower {
     }
 
     @Override
-    public boolean upgrade(Resources resources) {
-        boolean CanUpgrade = super.upgrade(resources);
-        if (CanUpgrade) {
-            setDamage(getDamage() + 2);
-            reloadTime = (reloadTime>=2)? reloadTime-1 : reloadTime;
-            setUpgradeCost(getUpgradeCost() + 7);
-        }
-        return CanUpgrade;
+    public void upgrade() {
+        super.upgrade();
+        reloadTime = (reloadTime>2)? reloadTime-1:reloadTime;
     }
 
-    private Catapult(int damage, int range, int UpgradeCost) {
-        super(damage, range, UpgradeCost); reloadTimeLeft = 0; reloadTime = 5;
+    public Catapult(int x, int y) {
+        super(DefaultPower, DefaultOuterRange, BuildCost); reloadTimeLeft = 0; reloadTime = DefaultReloadTime;
+        setX_position(x);
+        setY_position(y);
+    }
+
+    @Override
+    public String TowerToString(){
+        return "Catapult\n" +
+                super.TowerToString() +
+                "50 - 150";
     }
 
 }

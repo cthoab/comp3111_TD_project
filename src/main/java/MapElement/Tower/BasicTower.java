@@ -1,29 +1,32 @@
 package MapElement.Tower;
 
-import Arena.Resources;
+
+import MapElement.MapElement;
 
 public class BasicTower extends Tower {
-    public static int BuildCost;        // TODO need to be assigned value
-    public static BasicTower BuildBasicTower(int damage, int range, Resources resources){
-        if (resources.getResources() >= BuildCost)
-            return new BasicTower(damage,range,BuildCost);
-        // We use BuildCost as the first UpgradeCost
-        return null;
-    }
+    public static final int BuildCost = 2;        // TODO need to be assigned value
+    public static final int DefaultPower = 2;
+    public static final int DefaultRange = 65;
 
 
-    private BasicTower(int damage, int range, int UpgradeCost) {
-        super(damage, range, UpgradeCost);
+    public BasicTower(int x, int y){
+        super(DefaultPower, DefaultRange, BuildCost);
+        setX_position(x);
+        setY_position(y);
     }
 
     @Override
-    public boolean upgrade(Resources resources) {
-        boolean CanUpgrade = super.upgrade(resources);
-        if (CanUpgrade) {
-            setDamage(getDamage() + 2);
-            setUpgradeCost(getUpgradeCost() + 5);
-        }
-        return CanUpgrade;
+    public String TowerToString(){
+        return "Basic Tower\n" +
+                super.TowerToString() +
+                getRange();
+    }
+
+    @Override
+    public boolean checkInRange(MapElement m){
+        if(getDistance(this, m) < DefaultRange)
+            return true;
+        return false;
     }
 
 }

@@ -13,5 +13,7 @@ public class Penguin extends Monster{
     public void replenish(){
         if(getHP() + REPLENISH_HP <= ORIGINAL_HP)
             setHP(getHP() + REPLENISH_HP);
+        else
+            setHP(ORIGINAL_HP);
     }
 }
