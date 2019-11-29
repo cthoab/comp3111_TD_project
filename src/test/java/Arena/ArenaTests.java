@@ -2,7 +2,9 @@ package Arena;
 
 import MapElement.Monster.Monster;
 import MapElement.Tower.BasicTower;
+import MapElement.Tower.Catapult;
 import MapElement.Tower.Tower;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,6 +21,7 @@ public class ArenaTests {
             a.spawnMonster();
         System.out.println(a.monsters.size());
         Assert.assertEquals(a.monsters.size(),10);
+        Assert.assertEquals(a.checkGameOver(),false);
 
         for(int i=0; i<100; i++)
             a.monsterMove();
@@ -43,8 +46,11 @@ public class ArenaTests {
         Assert.assertEquals(a.towers.size(),4);
 
         BasicTower b = new BasicTower(1,0);
+        Catapult c = new Catapult(7,7);
+        Assert.assertEquals(c.checkInRange(b),false);
         Assert.assertEquals(a.TowerInfo(1,0), b.TowerToString());
-        Assert.assertEquals(a.TowerInfo(2,2), null);
+        Assert.assertEquals(a.TowerInfo(2,7), null);
+        Assert.assertEquals(a.TowerInfo(1,7), null);
 
         Assert.assertEquals(a.RemoveTower(1,1),true);
         Assert.assertEquals(a.RemoveTower(2,2),false);
@@ -60,11 +66,26 @@ public class ArenaTests {
     @Test
     public void testTowerAttack(){
         a = new Arena();
-        a.Resources = new SimpleIntegerProperty(100);
+        a.Resources = new SimpleIntegerProperty(1000);
         a.BuildTower('B', 20,60);
         a.BuildTower('I', 60,60);
         a.BuildTower('C', 100,60);
+        a.BuildTower('C', 1000,60);
+
         a.BuildTower('L', 140,60);
+        System.out.println(a.Resources.get());
+        for(int i=0; i<10; i++){
+            a.spawnMonster();
+            a.monsterMove();
+        }
+        a.resetTowers();
+        a.Resources.set(0);
+        a.BuildTower('B', 20,60);
+        a.BuildTower('I', 60,60);
+        a.BuildTower('C', 100,60);
+        a.BuildTower('C', 1000,60);
+
+
         for(int i=0; i<10; i++){
             a.spawnMonster();
             a.monsterMove();
