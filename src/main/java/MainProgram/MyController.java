@@ -82,6 +82,7 @@ public class MyController {
             this.setCenterY(center_y);
             this.setRadius(25);
             this.setFill(Color.YELLOW);
+            this.setOpacity(0.5);
             this.setVisible(true);
         }
     }
@@ -132,8 +133,6 @@ public class MyController {
     @FXML
     private void play() {
         System.out.println("Play button clicked");
-        arena.spawnMonster();
-        drawArena(arena);
     }
 
 
@@ -206,6 +205,8 @@ public class MyController {
         IceBall.clear();
         paneArena.getChildren().removeAll(AttackFX);
         AttackFX.clear();
+        paneArena.getChildren().removeAll(StoneCircle);
+        StoneCircle.clear();
         arena.resetTowers();
         arena.removeDeadMonsters();
         arena.monsterMove();
@@ -278,21 +279,25 @@ public class MyController {
         StoneCircle.add(new Stone(center_x, center_y, damage));
     }
 
-    public static void aoeDamage(Arena arena){
-        System.out.println("\n------- Range Attack -------");
+    public static void aoeDamage(Arena arena, Boolean laserType){
+        //laser indicates laser or stone
         for (Monster monster: arena.monsters) {
-            for (Laser laser: LaserLine)
+            if(laserType == true) {
+                Laser laser = LaserLine.get(LaserLine.size() - 1);
                 if (laser.contains(monster.getX_position(), monster.getY_position())) {
                     monster.setHP(monster.getHP() - laser.damage);
                     System.out.println(monster.simpleInfo() + "is hit by the laser and cause " + laser.damage + " HP damage!");
                 }
-            for (Stone stone: StoneCircle)
+            }
+            else {
+                Stone stone = StoneCircle.get(StoneCircle.size()-1);
                 if (stone.contains(monster.getX_position(), monster.getY_position())) {
                     monster.setHP(monster.getHP() - stone.damage);
                     System.out.println(monster.simpleInfo() + "is hit by the stone cause " + stone.damage + " HP damage!");
                 }
+            }
         }
-        StoneCircle.clear();
+        System.out.println("------------------------");
     }
 
     public void gameOver(){

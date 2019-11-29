@@ -2,6 +2,7 @@ package Arena;
 
 import MapElement.Monster.Monster;
 import MapElement.Tower.BasicTower;
+import MapElement.Tower.Tower;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,22 @@ public class ArenaTests {
         Assert.assertEquals(a.UpgradeTower(1,2),true);
         a.Resources.set(0);
         Assert.assertEquals(a.UpgradeTower(1,2),false);
-
+        a.resetTowers();
+        for(Tower t:a.towers)
+            Assert.assertEquals(t.getAttacked(),false);
     }
+
+    @Test
+    public void testTowerAttack(){
+        a = new Arena();
+        a.BuildTower('B', 20,60);
+        a.BuildTower('I', 60,60);
+        a.BuildTower('C', 100,60);
+        a.BuildTower('L', 140,60);
+        for(int i=0; i<10; i++){
+            a.spawnMonster();
+            a.monsterMove();
+        }
+    }
+
 }

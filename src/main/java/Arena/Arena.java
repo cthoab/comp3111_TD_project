@@ -172,27 +172,23 @@ public class Arena {
                     } else if (t instanceof LaserTower) {
                         MyController.DrawLaser(t.getX_position(), t.getY_position(), closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
-                        MyController.aoeDamage(this);
+                        MyController.aoeDamage(this, true);
                     }
                     else if(t instanceof BasicTower){
                         MyController.DrawAttack(closestMonster.getX_position(),closestMonster.getY_position(),t.getDamage());
                         System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
-
-                    }
-                    else {
-                        if (t instanceof Catapult) {
-                            if (((Catapult) t).ReloadTimeLeft() == 0) {
-                                MyController.throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
-                                ((Catapult) t).Reload();
-                                MyController.aoeDamage(this);
-                            }
-                        }
-                        closestMonster.setHP(closestMonster.getHP() - t.getDamage());
-                        System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
                         System.out.println("HP of " +  closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
                     }
-                    if (t instanceof Catapult)
+                    else if (t instanceof Catapult) {
+                        if (((Catapult) t).ReloadTimeLeft() == 0) {
+                            MyController.throwStone(closestMonster.getX_position(), closestMonster.getY_position(), t.getDamage());
+                            ((Catapult) t).Reload();
+                            System.out.println(t.simpleInfo() + " attacked " + closestMonster.simpleInfo());
+                            System.out.println("HP of " +  closestMonster.simpleInfo() + " dropped from " + OriginalHP + " to " + closestMonster.getHP());
+                            MyController.aoeDamage(this, false);
+                        }
                         ((Catapult) t).coolDown();
+                    }
                 }
         }
     }
