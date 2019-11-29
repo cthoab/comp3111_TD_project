@@ -92,7 +92,7 @@ public class MyController {
             this.setStartY(from_y);
             this.setEndX(to_x);
             this.setEndY(to_y);
-            this.setStrokeWidth(3);
+            this.setStrokeWidth(1);
             this.setStroke(Color.RED);
         }
     }
@@ -282,10 +282,12 @@ public class MyController {
         for (Monster monster: arena.monsters) {
             if(laserType == true) {
                 Laser laser = LaserLine.get(LaserLine.size() - 1);
+                laser.setStrokeWidth(7);
                 if (laser.contains(monster.getX_position(), monster.getY_position())) {
                     monster.setHP(monster.getHP() - laser.damage);
                     System.out.println(monster.simpleInfo() + "is hit by the laser and cause " + laser.damage + " HP damage!");
                 }
+                laser.setStrokeWidth(1);
             }
             else {
                 Stone stone = StoneCircle.get(StoneCircle.size()-1);

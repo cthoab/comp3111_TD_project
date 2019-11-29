@@ -4,7 +4,7 @@ import MapElement.MapElement;
 
 public class LaserTower extends Tower {
     public static int BuildCost = 8;
-    public static final int DefaultPower = 10;
+    public static final int DefaultPower = 5;
     public static final int DefaultAttackCost = 1;
 
     public int attackCost;
