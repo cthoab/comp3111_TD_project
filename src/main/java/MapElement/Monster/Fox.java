@@ -1,10 +1,16 @@
 package MapElement.Monster;
 
+/**
+ * Fox class
+ */
 public class Fox extends Monster {
 
     private static int FOX_SPEED = 60;
 
-    public Fox(){
+    /**
+     * Constructor
+     */
+    public Fox() {
         super();
         setSpeed(FOX_SPEED);
     }
